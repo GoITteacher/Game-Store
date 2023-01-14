@@ -1,0 +1,28 @@
+{
+    "games": [
+        {
+            "id": 123,
+            "name": "",
+            "author": "",
+            "publisher": "",
+            "date_release": "",
+            "price": 1000,
+            "sale": 10,
+            "homepage": "",
+            "images": [],
+            "media": [],
+            "os": "Windons",
+            "genres": []
+        }
+    ],
+    "users": [
+        {
+            "id": "",
+            "login": "",
+            "email": "",
+            "phone_number": "",
+            "birthday": "",
+            "developer": true
+        }
+    ]
+}

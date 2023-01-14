@@ -2,9 +2,11 @@
   "name": "game-store",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url /Game-Store/",
+    "server": "json-server --watch db.json --port 3333",
+    "push": "git add . && git commit -m 'update' && git push"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/GoITteacher/Game-Store/issues"
   },
-  "homepage": "https://github.com/GoITteacher/Game-Store#readme"
+  "homepage": "https://github.com/GoITteacher/Game-Store#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.2",
+    "json-server": "^0.17.1",
+    "parcel": "^2.8.2",
+    "parcel-reporter-clean-dist": "^1.0.4",
+    "parcel-transformer-hbs": "^1.0.4",
+    "posthtml-include": "^1.7.4"
+  }
 }

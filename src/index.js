@@ -1,1 +1,1 @@
-import './scripts/consts.js';
+import './scripts/constants';

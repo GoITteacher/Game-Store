@@ -1,5 +1,35 @@
-.header{
+.header-container{
    width: 100vw;
-   height: 300px; 
-   background-color: tomato;
+   min-height: 30px;
+   height: 7vh; 
+   background-color: $bg-secondary;
+   display: flex;
+   padding: 0 10px;
+
+   div{
+      margin:0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+}
+
+.header-logo{
+
+}
+
+.header-nav{
+   width: 70%;
+   a{
+      padding: 30%;
+      color: $text-gray
+   };
+
+   a:hover{
+      border-bottom: 4px solid $primary;
+   }
+}
+
+.header-auth{
+   width: 19%;
 }

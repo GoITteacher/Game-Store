@@ -5,7 +5,7 @@ const axios = axios2.create({
   baseURL: 'http://localhost:3333',
 });
 
-faker.locale = 'ru';
+faker.locale = 'en';
 faker.seed(0);
 
 export class GameStoreAPI {
@@ -53,8 +53,8 @@ function randomGame() {
     author: faker.name.fullName(),
     publisher: faker.company.name(),
     date_release: faker.date.past(),
-    price: faker.commerce.price(1000, 20000),
-    sale: faker.finance.amount(0, 80),
+    price: +faker.commerce.price(1000, 20000),
+    sale: faker.datatype.number({ min: 0, max: 80 }),
     homepage: faker.internet.url(),
     images: [
       faker.image.imageUrl(1920, 1080, 'game', true),

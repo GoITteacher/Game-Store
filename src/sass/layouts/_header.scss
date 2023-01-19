@@ -1,33 +1,40 @@
 .header-container{
    width: 100vw;
    min-height: 30px;
-   height: 7vh; 
+   height: 8vh; 
    background-color: $bg-secondary;
    display: flex;
    padding: 0 10px;
 
-   div{
+   &>div{
       margin:0 10px;
       display: flex;
-      justify-content: center;
-      align-items: center;
    }
 }
 
 .header-logo{
-
+   justify-content: center;
+   align-items: center;
 }
 
 .header-nav{
+   display: flex;
    width: 70%;
+   flex-direction: row;
+   align-items: center;
+   justify-content: start;
+   
    a{
-      padding: 30%;
-      color: $text-gray
+      margin: 0;
+      padding: 2vh;
+      color: $text-gray;
+      transition: all 400ms;
    };
 
-   a:hover{
-      border-bottom: 4px solid $primary;
+   a:hover, .active-link{
+      border-bottom: 3px solid $primary;
    }
+
 }
 
 .header-auth{

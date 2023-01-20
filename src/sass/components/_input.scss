@@ -1,0 +1,14 @@
+input{
+    background: $bg-secondary;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    height: 50px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgb(245, 245, 245);
+
+    padding: 0 10px;
+}

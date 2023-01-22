@@ -4,4 +4,5 @@ console.log(process.env);
 export const MONGO_LOGIN = process.env.MONGO_LOGIN;
 export const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
-console.log(MONGO_LOGIN);
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;

@@ -1,2 +1,6 @@
 MONGO_LOGIN = "**********"
 MONGO_PASSWORD = "**********"
+
+
+GOOGLE_CLIENT_SECRET = "***"
+GOOGLE_CLIENT_ID = "***"

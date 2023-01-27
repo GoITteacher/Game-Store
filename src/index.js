@@ -1,3 +1,6 @@
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
 import gameTemplate from './templates/game-template.hbs';
 import { DataBase } from './modules/mongodb/index.js';
 const refs = {

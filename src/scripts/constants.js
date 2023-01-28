@@ -1,5 +1,4 @@
 require('dotenv').config();
-console.log(process.env);
 
 export const HOST = '/Game-Store/';
 // export const HOST = '/';

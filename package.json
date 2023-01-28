@@ -33,6 +33,7 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@fancyapps/ui": "^4.0.31",
     "axios": "^1.2.3",
     "lazysizes": "^5.3.2",
     "mongodb": "^4.13.0",

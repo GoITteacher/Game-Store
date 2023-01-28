@@ -1,6 +1,6 @@
 .game-info{
     min-height: 90vh;
-    & .game-header{
+    .game-header{
         min-height: fit-content;
         margin-bottom: 20px;
         padding: 20px 0;
@@ -11,20 +11,20 @@
         }
     }
 
-    & .game-body{
+    .game-body{
         min-height: 80vw;
         width: 100%;
         display: flex;
         justify-content: space-between;
 
-        & .game-body__left{
+        .game-body__left{
             min-height: 100%;
             max-width: 60%;
             width: fit-content;
             box-sizing: border-box;
             margin-right: 10%;
 
-            & .game-img{
+            .game-img{
                 width: 100%;
                 overflow: hidden;
                 border-radius: 5px;
@@ -37,18 +37,27 @@
                 }
             }
 
-            & .game-desc{
+            .game-desc{
                 position: relative;
                 margin: 20px 0;
                 max-height: 200px;
                 height: fit-content;
                 overflow: hidden;
 
-                & p{
+                p{
                     margin-top: 10px;
                     width: 100%;
                     overflow: hidden;
                     color: $text-gray;
+                }
+
+                .game-gallery{
+                    margin-top: 20px;
+                    width: 100%;
+                    height: fit-content;
+                    padding: 0px;
+                    display: flex;
+                    flex-direction: column;
                 }
 
                 .bottom-shadow {
@@ -61,7 +70,7 @@
             }
         }
 
-        & .game-body__right{
+        .game-body__right{
             display: flex;
             flex-direction: column;
             
@@ -69,27 +78,27 @@
             max-width: 30%;
             width: 500px;
 
-            & .game-poster{
+            .game-poster{
                 width: 100%;
                 height: 150px;
                 overflow: hidden;
                 border-radius: 5px;
 
-                & img{
+                img{
                     width: 100%;
                     height: 100%;
                     object-fit:cover
                 }
             }
 
-            & .list-btn{
+            .list-btn{
                 margin-top: 20px;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
             }
 
-            & .list-info{
+            .list-info{
                 margin-top: 20px;
                 display: flex;
                 flex-direction: column;
@@ -97,14 +106,14 @@
                 align-items: center;
                 color: $text-gray;
 
-                & li{
+                li{
                     width: 100%;
                     padding: 10px 0;
                     display: flex;
                     justify-content: space-between;
                     border-bottom: 1px solid $bg-secondary;
 
-                    & *:nth-child(2){
+                    *:nth-child(2){
                         color: $text;
                         font-weight: 100;
                         opacity: 0.9;
@@ -112,11 +121,11 @@
                 }
             }
 
-            & .footer-list-btn{
+            .footer-list-btn{
                 display: flex;
                 justify-content: space-between;
                 margin-top: 10px;
-                & .btn{
+                .btn{
                     width: 48%;
                     height: 35px;
                     padding: 0;

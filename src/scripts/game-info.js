@@ -1,6 +1,7 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
+import { createGallery } from '../modules/gallery';
 import { loadFromLS, saveToLS } from './helpers';
 import { setRating } from '../modules/stars';
 import { DataBase } from '../modules/mongodb';
@@ -24,9 +25,11 @@ refs.loadMoreInfo.addEventListener('click', e => {
   if (CONSTANTS.isFullInfo) {
     infoElem.style.maxHeight = '200px';
     shadowElem.classList.remove('hide');
+    e.currentTarget.textContent = 'SHOW LESS';
   } else {
     infoElem.style.maxHeight = 'none';
     shadowElem.classList.add('hide');
+    e.currentTarget.textContent = 'SHOW LESS';
   }
 
   CONSTANTS.isFullInfo = !CONSTANTS.isFullInfo;
@@ -49,6 +52,6 @@ async function onLoadPage() {
   }
 
   setRating(5);
+  createGallery(currentGame.images);
 }
-
 onLoadPage();

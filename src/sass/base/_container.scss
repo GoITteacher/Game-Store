@@ -2,6 +2,11 @@
     max-width: 320px;
     margin: 20 auto;
     padding: 10px 20px;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
 
     @media screen and (min-width: 768px) {
         max-width: 768px;

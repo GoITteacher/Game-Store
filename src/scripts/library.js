@@ -9,7 +9,9 @@ const refs = {
 
 async function loadGames() {
   const games = await DataBase.getGames();
-  refs.gameListEl.innerHTML = games.map(gameTemplate).join('');
+  if (games.length) {
+    refs.gameListEl.innerHTML = games.map(gameTemplate).join('');
+  }
 }
 
 loadGames();

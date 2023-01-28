@@ -57,16 +57,40 @@ function randomGame() {
     sale: faker.datatype.number({ min: 0, max: 80 }),
     homepage: faker.internet.url(),
     images: [
-      faker.image.imageUrl(1920, 1080, 'game', true),
-      faker.image.imageUrl(1920, 1080, 'game', true),
-      faker.image.imageUrl(1920, 1080, 'game', true),
-      faker.image.imageUrl(1920, 1080, 'game', true),
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
     ],
     media: [
-      faker.image.imageUrl(1920, 1080, 'game', true),
-      faker.image.imageUrl(1920, 1080, 'game', true),
-      faker.image.imageUrl(1920, 1080, 'game', true),
-      faker.image.imageUrl(1920, 1080, 'game', true),
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
+      `https://source.unsplash.com/1920x1080/?random=${getRandom(
+        0,
+        9999
+      )}&game`,
     ],
     os: 'Windows',
     genres: [faker.music.genre(), faker.music.genre(), faker.music.genre()],
@@ -82,4 +106,8 @@ function randomUser() {
     birthday: faker.date.birthdate(),
     developer: faker.datatype.boolean(),
   };
+}
+
+function getRandom(min = 0, max = 100) {
+  return Math.round(Math.random() * (max - min) + min);
 }

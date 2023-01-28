@@ -3,14 +3,14 @@ const axios = axiosV2.create({
   baseURL: 'http://localhost:3333/',
 });
 export class DataBase {
-  #limit = 20;
+  static #limit = 60;
 
   static getGame() {}
 
   static async getGames(page = 1) {
     const options = {
       params: {
-        _limit: 20,
+        _limit: DataBase.#limit,
         _page: page,
       },
     };

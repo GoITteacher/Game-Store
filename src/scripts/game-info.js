@@ -4,6 +4,7 @@ import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { loadFromLS, saveToLS } from './helpers';
 import { setRating } from '../modules/stars';
 import { DataBase } from '../modules/mongodb';
+import { HOST } from './constants';
 
 // ============================================
 
@@ -34,14 +35,17 @@ refs.loadMoreInfo.addEventListener('click', e => {
 // ============================================
 let currentGame;
 async function onLoadPage() {
-  const gameId = window.location.search.replace('?id=', '');
+  let gameId = window.location.search.replace('?id=', '');
   currentGame = loadFromLS('currentGame');
 
   if (!currentGame && gameId == '') {
-    window.location.pathname = '/Game-Store/';
+    window.location.pathname = HOST;
   } else if (!currentGame) {
     currentGame = await DataBase.getGame(gameId);
     saveToLS('currentGame', currentGame);
+  } else {
+    // TODO
+    // window.location.search = `?id=${currentGame.id}`;
   }
 
   setRating(5);

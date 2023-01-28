@@ -36,11 +36,10 @@ let currentGame;
 async function onLoadPage() {
   const gameId = +window.location.search.replace('?id=', '');
   currentGame = loadFromLS('currentGame');
+
   if (!currentGame && !gameId) {
     window.location.pathname = '/Game-Store/';
-  }
-
-  if (!currentGame) {
+  } else if (!currentGame) {
     currentGame = await DataBase.getGame(gameId);
     saveToLS('currentGame', currentGame);
   }

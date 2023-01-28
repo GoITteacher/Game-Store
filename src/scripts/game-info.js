@@ -34,10 +34,10 @@ refs.loadMoreInfo.addEventListener('click', e => {
 // ============================================
 let currentGame;
 async function onLoadPage() {
-  const gameId = +window.location.search.replace('?id=', '');
+  const gameId = window.location.search.replace('?id=', '');
   currentGame = loadFromLS('currentGame');
 
-  if (!currentGame && !gameId) {
+  if (!currentGame && gameId == '') {
     window.location.pathname = '/Game-Store/';
   } else if (!currentGame) {
     currentGame = await DataBase.getGame(gameId);

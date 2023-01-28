@@ -22,5 +22,5 @@ refs.gameListEl.addEventListener('click', e => {
   // TODO Якщо не знайшло такої гри то зробити запит на сервер
 
   saveToLS('currentGame', currentGame);
-  window.location.pathname = `/Game-Store/game-info.html?id=${currentGame.id}`;
+  window.location.pathname = `/Game-Store/game-info.html`;
 });

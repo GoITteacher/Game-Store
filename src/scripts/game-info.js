@@ -16,14 +16,26 @@ const CONSTANTS = {
 
 // ============================================
 
-refs.loadMoreInfo.addEventListener('click', e => {});
+refs.loadMoreInfo.addEventListener('click', e => {
+  const infoElem = document.querySelector('.game-desc');
+  const shadowElem = document.querySelector('.bottom-shadow');
+  if (CONSTANTS.isFullInfo) {
+    infoElem.style.maxHeight = '200px';
+    shadowElem.classList.remove('hide');
+  } else {
+    infoElem.style.maxHeight = 'none';
+    shadowElem.classList.add('hide');
+  }
+
+  CONSTANTS.isFullInfo = !CONSTANTS.isFullInfo;
+});
 
 // ============================================
 let currentGame;
 function onLoadPage() {
   currentGame = loadFromLS('currentGame');
   if (!currentGame) {
-    window.location.pathname = '/';
+    window.location.pathname = '/Game-Store/';
   }
   setRating(4.7);
 }

@@ -9,7 +9,7 @@
 .game-card{
     margin: 15px;
     padding: 5px;
-    background-color: $bg-secondary;
+    // background-color: $bg-secondary;
 
     width: 200px;
     height: 350px;
@@ -39,5 +39,9 @@
     & .game-card__price{
         margin: 10px 5px;
         font-size: small;
+    }
+
+    &:hover{
+        // box-shadow: rgba(143, 143, 143, 0.1) 0px 8px 24px;
     }
 }

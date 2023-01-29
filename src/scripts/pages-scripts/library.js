@@ -9,6 +9,7 @@ const refs = {
 
 async function loadGames() {
   const games = await DataBase.getGames();
+  console.log(games);
   if (games.length) {
     refs.gameListEl.innerHTML = games.map(gameTemplate).join('');
   } else {
@@ -22,8 +23,8 @@ refs.gameListEl.addEventListener('click', e => {
   if (e.target === e.currentTarget) return;
   const gameEl = e.target.closest('[data-id]');
   const games = loadFromLS('allGames') || [];
-  const currentGame = games.find(el => +el.id === +gameEl.dataset.id);
-
+  const currentGame = games.find(el => el.id === gameEl.dataset.id);
+  console.log(currentGame);
   // TODO Якщо не знайшло такої гри то зробити запит на сервер
 
   saveToLS('currentGame', currentGame);

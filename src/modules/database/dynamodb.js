@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import { ACCESS_KEY, SECRET_ACCESS_KEY } from './consts';
+import { ACCESS_KEY, SECRET_ACCESS_KEY } from '../../scripts/constants.js';
 import uniqid from 'uniqid';
 
 let awsConfig = {
@@ -11,6 +11,7 @@ let awsConfig = {
 
 AWS.config.update(awsConfig);
 let docClient = new AWS.DynamoDB.DocumentClient();
+let lastEvaluatedKey;
 
 export class DynamoAPI {
   static async createItem(table, item) {
@@ -71,19 +72,19 @@ export class DynamoAPI {
     return data.Items;
   }
 
-  static async getAllItems()
+  static async getAllItems() {}
 
-  static async getData(page, pageSize){
-        const params = {
-            TableName: 'your-table-name',
-            Limit: pageSize,
-            ExclusiveStartKey: page > 1 ? lastEvaluatedKey : undefined
-        };
+  static async getData(table, page, pageSize) {
+    const params = {
+      TableName: table,
+      Limit: pageSize,
+      ExclusiveStartKey: page > 1 ? lastEvaluatedKey : undefined,
+    };
 
-        const data = await dynamoDb.scan(params).promise();
-        lastEvaluatedKey = data.LastEvaluatedKey;
-        return data.Items;
-    }
+    const data = await docClient.scan(params).promise();
+    lastEvaluatedKey = data.LastEvaluatedKey;
+    return data.Items;
+  }
 
   static async deleteItem(table, id) {
     var params = {

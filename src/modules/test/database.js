@@ -1,8 +1,9 @@
 import axios2 from 'axios';
 import { faker } from '@faker-js/faker';
+import { DB_URL } from '../../scripts/constants.js';
 
 const axios = axios2.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: DB_URL,
 });
 
 faker.locale = 'en';

@@ -2,6 +2,7 @@ import axiosV2 from 'axios';
 import { DB_URL } from '../../scripts/constants.js';
 import { saveToLS, loadFromLS } from '../../scripts/helpers.js';
 
+console.log(DB_URL);
 const axios = axiosV2.create({
   baseURL: DB_URL,
 });

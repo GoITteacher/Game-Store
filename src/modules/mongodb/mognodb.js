@@ -1,4 +1,4 @@
-import mongoose from 'mongoose/browser';
+/* import mongoose from 'mongoose/browser';
 
 const driver = global.MONGOOSE_DRIVER_PATH || './drivers/node-mongodb-native';
 const Connection = require(driver + '/connection');
@@ -99,3 +99,4 @@ function randomGame() {
     desc: faker.lorem.paragraphs(3),
   };
 }
+ */

@@ -1,11 +1,11 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
-import { createGallery } from '../modules/gallery';
-import { formatDate, loadFromLS, saveToLS } from './helpers';
-import { setRating } from '../modules/stars';
-import { DataBase } from '../modules/mongodb';
-import { HOST } from './constants';
+import { createGallery } from '../../modules/gallery';
+import { formatDate, loadFromLS, saveToLS } from '../helpers';
+import { setRating } from '../../modules/stars';
+import { DataBase } from '../../modules/mongodb';
+import { HOST } from '../constants';
 
 // ============================================
 

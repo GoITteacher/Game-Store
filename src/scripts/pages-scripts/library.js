@@ -1,7 +1,7 @@
-import gameTemplate from '../templates/game-template.hbs';
-import { DataBase } from '../modules/mongodb/index.js';
-import { loadFromLS, saveToLS } from './helpers';
-import { HOST } from './constants';
+import gameTemplate from '../../templates/game-template.hbs';
+import { DataBase } from '../../modules/mongodb/index.js';
+import { loadFromLS, saveToLS } from '../helpers';
+import { HOST } from '../constants';
 
 const refs = {
   gameListEl: document.querySelector('.js-game-list'),

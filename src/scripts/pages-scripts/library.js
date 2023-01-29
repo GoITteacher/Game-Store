@@ -1,5 +1,5 @@
 import gameTemplate from '../../templates/game-template.hbs';
-import { DataBase } from '../../modules/mongodb/index.js';
+import { DataBase } from '../../modules/database/index.js';
 import { loadFromLS, saveToLS } from '../helpers';
 import { HOST } from '../constants';
 

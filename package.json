@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /Game-Store/",
-    "server": "json-server --watch db.json --port 3333",
+    "server": "json-server --no-cors --watch db.json --port 3333",
     "push": "git add . && git commit -m 'update' && git push"
   },
   "repository": {

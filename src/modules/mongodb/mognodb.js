@@ -1,4 +1,9 @@
 import mongoose from 'mongoose/browser';
+
+const driver = global.MONGOOSE_DRIVER_PATH || './drivers/node-mongodb-native';
+const Connection = require(driver + '/connection');
+
+
 import { faker } from '@faker-js/faker';
 import { connect } from 'mongoose';
 import {
@@ -10,7 +15,7 @@ import {
 faker.locale = 'en';
 faker.seed(0);
 
-connect(
+Connection(
   `mongodb+srv://${MONGO_LOGIN}:${MONGO_PASSWORD}@${MONGO_CLUSTER}.cp32m0m.mongodb.net/?retryWrites=true&w=majority`
 );
 

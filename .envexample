@@ -1,6 +1,6 @@
 MONGO_LOGIN = "**********"
 MONGO_PASSWORD = "**********"
-
+MONGO_CLUSTER = "***"
 
 GOOGLE_CLIENT_SECRET = "***"
 GOOGLE_CLIENT_ID = "***"

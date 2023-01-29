@@ -1,8 +1,10 @@
 import axiosV2 from 'axios';
 import { saveToLS, loadFromLS } from '../../scripts/helpers.js';
+
 const axios = axiosV2.create({
   baseURL: 'http://localhost:3333/',
 });
+
 export class DataBase {
   static #limit = 60;
 

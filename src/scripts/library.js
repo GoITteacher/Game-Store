@@ -11,6 +11,8 @@ async function loadGames() {
   const games = await DataBase.getGames();
   if (games.length) {
     refs.gameListEl.innerHTML = games.map(gameTemplate).join('');
+  } else {
+    refs.gameListEl.children[0].style.opacity = '1';
   }
 }
 

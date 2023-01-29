@@ -128,3 +128,20 @@ body{
 *{
     transition: all 0.01s;
 }
+
+hr{
+    border-color: rgba(135, 135, 135, 0.587);
+}
+
+.fb{
+    display: flex;
+}
+
+.fb-v{
+    display: flex;
+    flex-direction: column;
+}
+
+.center{
+    align-items: center;
+}

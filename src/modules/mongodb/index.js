@@ -1,8 +1,9 @@
 import axiosV2 from 'axios';
+import { DB_URL } from '../../scripts/constants.js';
 import { saveToLS, loadFromLS } from '../../scripts/helpers.js';
 
 const axios = axiosV2.create({
-  baseURL: 'http://localhost:3333/',
+  baseURL: DB_URL,
 });
 
 export class DataBase {

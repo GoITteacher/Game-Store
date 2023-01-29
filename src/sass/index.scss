@@ -4,12 +4,6 @@
 @import './base/common';
 @import './base/container';
 
-@import './layouts/header';
-@import './layouts/main';
-@import './layouts/footer';
-@import './layouts/game-info';
-@import './layouts/auth';
-
 @import './components/other';
 @import './components/input';
 @import './components/button';
@@ -17,3 +11,9 @@
 @import './components/game';
 @import './components/starts';
 @import './components/gallery';
+
+@import './layouts/header';
+@import './layouts/main';
+@import './layouts/footer';
+@import './layouts/game-info';
+@import './layouts/auth';

@@ -1,42 +1,45 @@
-.header-container{
+.header-container {
    width: 100vw;
    min-height: 30px;
-   height: 8vh; 
+   height: 8vh;
    background-color: $bg-secondary;
    display: flex;
    padding: 0 10px;
 
-   &>div{
-      margin:0 10px;
+   &>div {
+      margin: 0 10px;
       display: flex;
    }
 }
 
-.header-logo{
+.header-logo {
    justify-content: center;
    align-items: center;
 }
 
-.header-nav{
+.header-nav {
    display: flex;
    width: 70%;
    flex-direction: row;
    align-items: center;
    justify-content: start;
-   
-   a{
+
+   a {
       margin: 0;
       padding: 2vh;
       color: $text-gray;
-      transition: all 400ms;
-   };
+      transition: all 200ms;
+   }
 
-   a:hover, .active-link{
+   ;
+
+   a:hover,
+   .active-link {
       border-bottom: 3px solid $primary;
    }
 
 }
 
-.header-auth{
+.header-auth {
    width: 19%;
 }

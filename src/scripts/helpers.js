@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 export function saveToLS(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
@@ -22,3 +24,7 @@ export function formatDate(date) {
 
   return [day, month, year].join('/');
 }
+
+export const sha256 = data => {
+  return crypto.createHash('sha256').update(data, 'utf8').digest('hex');
+};

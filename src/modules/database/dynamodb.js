@@ -49,22 +49,39 @@ export class DynamoAPI {
     });
   }
 
-  static async getItem(table, id, nameCollumn = 'id') {
+  static async getItemById(table, id, nameColumn = 'id') {
     let params = {
       TableName: table,
       Key: {
-        [nameCollumn]: id,
+        [nameColumn]: id,
       },
     };
     return DynamoAPI.getDataPromise(params);
   }
 
-  static async getItems(table, id, nameCollumn = 'id') {
+  static async getItem(table, id, nameColumn = 'id') {
+    const params = {
+      TableName: table,
+      IndexName: 'LoginIndex',
+      KeyConditionExpression: `#${nameColumn} = :${nameColumn}`,
+      ExpressionAttributeNames: {
+        [`#${nameColumn}`]: nameColumn,
+      },
+      ExpressionAttributeValues: {
+        [`:${nameColumn}`]: id,
+      },
+    };
+
+    const result = await docClient.query(params).promise();
+    return result.Items[0];
+  }
+
+  static async getItems(table, id, nameColumn = 'id') {
     var params = {
       TableName: table,
-      FilterExpression: `contains(${nameCollumn}, :${nameCollumn})`,
+      FilterExpression: `contains(${nameColumn}, :${nameColumn})`,
       ExpressionAttributeValues: {
-        [':' + nameCollumn]: id,
+        [':' + nameColumn]: id,
       },
     };
 

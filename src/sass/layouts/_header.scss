@@ -41,5 +41,15 @@
 }
 
 .header-auth {
-   width: 19%;
+   width: 20%;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+
+   a{
+      margin: 0;
+      padding: 2vh;
+      color: $text-gray;
+      transition: all 200ms;
+   }
 }

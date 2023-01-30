@@ -10,7 +10,7 @@ const TABLES = {
 };
 
 export class DataBase {
-  static #limit = 60;
+  static #limit = 5;
 
   static createGame(game) {
     if (!game) game = randomGame();

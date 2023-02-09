@@ -1,8 +1,8 @@
-select.custom-select{
+select.custom-select {
   color: $text;
-  outline:none;
+  outline: none;
   border-radius: 10px;
-  font-size:medium;
+  font-size: medium;
   width: fit-content;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -10,6 +10,7 @@ select.custom-select{
   padding: 10px;
   text-align: center;
   border-bottom: 1px solid rgba(128, 128, 128, 0.454);
+  background-color: $bg-primary;
 }
 
 select::-ms-expand {

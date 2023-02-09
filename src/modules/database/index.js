@@ -10,6 +10,7 @@ const TABLES = {
 
 export class DataBase {
   static #limit = 20;
+  static page = 1;
 
   static createGame(game) {
     if (!game) game = randomGame();
@@ -22,9 +23,14 @@ export class DataBase {
     return game;
   }
 
-  static async getGames(page = 1) {
+  static async getGames(page) {
+    if (page) DataBase.page = page;
     try {
-      const games = await DynamoAPI.getData(TABLES.game, page, DataBase.#limit);
+      const games = await DynamoAPI.getData(
+        TABLES.game,
+        DataBase.page,
+        DataBase.#limit
+      );
       saveToLS('allGames', games);
       return games;
     } catch (err) {

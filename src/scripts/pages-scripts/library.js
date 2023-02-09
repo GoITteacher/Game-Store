@@ -37,7 +37,7 @@ let GAMES = [
 ];
 
 async function loadGames() {
-  const games = await DataBase.getGames();
+  const games = await DataBase.getGames(1);
   GAMES = games;
   if (games.length) {
     refs.gameListEl.innerHTML = games.map(gameTemplate).join('');
@@ -60,44 +60,63 @@ refs.gameListEl.addEventListener('click', e => {
   window.location.pathname = `${HOST}game-info.html`;
 });
 
-function renderGame(games) {
+function renderGame(games, reset = true) {
+  const elems = refs.navMenuElem.querySelectorAll('[name]');
+  const gameName = elems[0].value;
+  const gameSort = elems[1].value;
+  const gameGenre = elems[2].value;
+  const gameRating = elems[3].value;
+
+  if (gameSort != 'null') {
+    reset = true;
+    games = GAMES;
+  }
+  if (gameName) games = games.filter(el => el.name.includes(gameName));
+  if (gameGenre != 'null')
+    games = games.filter(el => el.genres.includes(gameGenre));
+  if (gameRating != 'null')
+    games = games.filter(el => Math.round(+el.rating) === +gameRating);
+
+  if (gameSort != 'null') {
+    games = [...games].sort((a, b) => {
+      if (gameSort === 'name') {
+        return a[gameSort].localeCompare(b[gameSort]);
+      } else {
+        return Number(a[gameSort]) - Number(b[gameSort]);
+      }
+    });
+  }
+
+  if (reset) refs.gameListEl.innerHTML = '';
   if (games.length) {
-    refs.gameListEl.innerHTML = games.map(gameTemplate).join('');
+    refs.gameListEl.insertAdjacentHTML(
+      'beforeend',
+      games.map(gameTemplate).join('')
+    );
   } else {
     refs.gameListEl.innerHTML = '';
   }
 }
 
 refs.navMenuElem.addEventListener('change', e => {
-  const value = e.target.value;
-  const name = e.target.name;
-  if (value === 'null') {
-    renderGame(GAMES);
-    return;
-  }
-
-  console.log(GAMES);
-  switch (name) {
-    case 'game':
-      break;
-    case 'sort':
-      renderSort(value);
-      break;
-    case 'rating':
-      break;
-    case 'genre':
-      break;
-  }
+  renderGame(GAMES);
 });
 
-function renderSort(value) {
-  const sortedGame = GAMES.sort((a, b) => {
-    if (value === 'name') {
-      return a[value].localeCompare(b[value]);
-    } else {
-      return Number(a[value]) - Number(b[value]);
-    }
-  });
+let isActiveQuery = false;
+document.addEventListener('scroll', onWindowScroll);
+async function onWindowScroll(e) {
+  const element = e.target.documentElement;
+  const clientHeight = element.clientHeight;
+  const scrollHeight = element.scrollHeight - clientHeight;
+  const scrollTop = scrollHeight - element.scrollTop;
+  if (scrollTop < 600 && !isActiveQuery) {
+    isActiveQuery = true;
+    const games = await DataBase.getGames(DataBase.page + 1);
 
-  renderGame(sortedGame);
+    if (games.length !== 0) {
+      isActiveQuery = false;
+      GAMES.push(...games);
+      renderGame(games, false);
+    } else document.removeEventListener('scroll', onWindowScroll);
+  }
 }

@@ -34,11 +34,14 @@
         margin:10px 5px;
         text-overflow: ellipsis;
         word-wrap: none;
+        height: 17px;
+        overflow: hidden;
     }
 
     & .game-card__price{
         margin: 10px 5px;
         font-size: small;
+        color: $text-gray;
     }
 
     &:hover{

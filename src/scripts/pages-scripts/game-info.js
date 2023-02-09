@@ -82,5 +82,11 @@ function loadInfo(game) {
   gamesElem.gameRelease.textContent = formatDate(new Date(game.date_release));
 
   createGallery(game.images);
-  setRating((Math.random() * 5).toFixed(1));
+  setRating(game.rating || (Math.random() * 5).toFixed(1));
 }
+
+setTimeout(() => {
+  window.addEventListener('wheel', event => {
+    console.log('Scrolling...');
+  });
+}, 3000);

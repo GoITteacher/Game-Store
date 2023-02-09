@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker';
 faker.locale = 'en';
-faker.seed(0);
 
 import { saveToLS, loadFromLS } from '../../scripts/helpers.js';
 import { DynamoAPI } from './dynamodb.js';
@@ -10,7 +9,7 @@ const TABLES = {
 };
 
 export class DataBase {
-  static #limit = 5;
+  static #limit = 20;
 
   static createGame(game) {
     if (!game) game = randomGame();
@@ -40,10 +39,16 @@ function randomGame() {
     name: faker.commerce.productName(),
     author: faker.name.fullName(),
     publisher: faker.company.name(),
-    date_release: faker.date.past(),
+    rating: (Math.random() * 5).toFixed(1),
+    downloads: getRandom(1000, 10000),
+    date_release: faker.date.past().getTime(),
     price: +faker.commerce.price(1000, 20000),
     sale: faker.datatype.number({ min: 0, max: 80 }),
     homepage: faker.internet.url(),
+    specs: {
+      minimum: {},
+      recommend: {},
+    },
     images: [
       `https://source.unsplash.com/1920x1080/?random=${getRandom(
         0,

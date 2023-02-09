@@ -1,34 +1,34 @@
 <div class="container">
-    <div class="nav-container">
+    <div class="nav-container js-nav-menu">
         <div class="input">
-            <input type="text">
+            <input name="game" type="text">
         </div>
 
-            <select class="custom-select">
-              <option value="null">Сортировка</option>
-              <option value="1">По названию</option>
-              <option value="2">По рейтингу</option>
-              <option value="3">По скачиваниям</option>
-              <option value="4">По дате</option>
-            </select>
-        <select class="custom-select">
-            <option value="null">Жанр</option>
-            <option value="1">По названию</option>
-            <option value="2">По рейтингу</option>
-            <option value="3">По скачиваниям</option>
-            <option value="4">По дате</option></select>
-        <select class="custom-select">
-            <option value="null">Рейтинг</option>
-              <option value="1">По названию</option>
-              <option value="2">По рейтингу</option>
-              <option value="3">По скачиваниям</option>
-              <option value="4">По дате</option>
+        <select name="sort" class="custom-select">
+            <option value="null">Sort</option>
+            <option value="name">By name</option>
+            <option value="price">By price</option>
+            <option value="rating">By rating</option>
+            <option value="downloads">By downloads</option>
+            <option value="date_release">By date release</option>
         </select>
-    </div>
-
-
-    <div>
-
+        <select name="genre" class="custom-select">
+            <option value="null">Genre</option>
+            <option value="actions">Action games</option>
+            <option value="adventure">Adventure Games</option>
+            <option value="rpg">RPG games</option>
+            <option value="shooters">Shooters</option>
+            <option value="strategies">Strategies</option>
+            <option value="survival">survival games</option>
+        </select>
+        <select name="rating" class="custom-select">
+            <option value="null">Rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="4">5</option>
+        </select>
     </div>
     
     <ul class="game_list js-game-list">

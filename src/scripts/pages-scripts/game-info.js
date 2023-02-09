@@ -6,6 +6,7 @@ import { formatDate, loadFromLS, saveToLS } from '../helpers';
 import { setRating } from '../../modules/stars';
 import { DataBase } from '../../modules/database';
 import { HOST } from '../constants';
+import specTemplate from '../../templates/spec-template.hbs';
 
 // ============================================
 
@@ -22,6 +23,8 @@ const gamesElem = {
   gameRelease: document.querySelector('.js-game-release'),
   gamePlatform: document.querySelector('.js-game-platform'),
   gamePrice: document.querySelector('.js-game-price'),
+  minSpec: document.querySelector('.js-min-specs'),
+  recommendSpec: document.querySelector('.js-recommend-specs'),
 };
 
 const CONSTANTS = {
@@ -81,12 +84,24 @@ function loadInfo(game) {
   gamesElem.gamePrice.textContent = game.price;
   gamesElem.gameRelease.textContent = formatDate(new Date(game.date_release));
 
+  if (game.specs) {
+    const min = game.specs.minimum;
+    const recommend = game.specs.recommend;
+
+    for (const [key, value] of Object.entries(min)) {
+      const template = specTemplate({ key, value });
+      gamesElem.minSpec.insertAdjacentHTML('beforeend', template);
+
+      let recTemplate;
+      if (recommend[key]) {
+        recTemplate = specTemplate({ key, value: recommend[key] });
+      } else {
+        recTemplate = specTemplate({ key: '', value: '' });
+      }
+      gamesElem.recommendSpec.insertAdjacentHTML('beforeend', recTemplate);
+    }
+  }
+
   createGallery(game.images);
   setRating(game.rating || (Math.random() * 5).toFixed(1));
 }
-
-setTimeout(() => {
-  window.addEventListener('wheel', event => {
-    console.log('Scrolling...');
-  });
-}, 3000);

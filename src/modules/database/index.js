@@ -52,8 +52,8 @@ function randomGame() {
     sale: faker.datatype.number({ min: 0, max: 80 }),
     homepage: faker.internet.url(),
     specs: {
-      minimum: {},
-      recommend: {},
+      minimum: generateSpec(),
+      recommend: generateSpec(),
     },
     images: [
       `https://source.unsplash.com/1920x1080/?random=${getRandom(
@@ -109,4 +109,33 @@ function randomUser() {
 
 function getRandom(min = 0, max = 100) {
   return Math.round(Math.random() * (max - min) + min);
+}
+
+export function generateSpec() {
+  const specs = {
+    OS: [
+      'Windows XP',
+      'Windows 7',
+      'Windows 8',
+      'Windows 10',
+      'Windows 11',
+      'MacOS',
+      'Linus',
+    ],
+    Processor: ['Intel or AMD at 2.8 GHz'],
+    Memory: ['4GB RAM', '8GB RAM', '16GB RAM'],
+    Graphics: ['NVIDIA GeForce 8600/9600GT', 'ATI/AMD Radeon HD2600/3600'],
+    DirectX: ['v9', 'v10', 'v11', 'v12', 'v13'],
+    Storage: ['10GB', '20GB', '30GB', '40GB', '50GB', '100GB'],
+  };
+
+  const result = {};
+
+  for (let i = 0; i < getRandom(3, 7); i++) {
+    let key = Object.keys(specs)[getRandom(0, Object.keys(specs).length - 1)];
+    let rand = specs[key][getRandom(0, specs[key].length - 1)];
+    result[key] = rand;
+  }
+
+  return result;
 }

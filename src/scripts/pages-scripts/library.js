@@ -2,7 +2,7 @@ import gameTemplate from '../../templates/game-template.hbs';
 import { DataBase } from '../../modules/database/index.js';
 import { loadFromLS, saveToLS } from '../helpers';
 import { HOST } from '../constants';
-
+console.log(HOST);
 const refs = {
   gameListEl: document.querySelector('.js-game-list'),
   navMenuElem: document.querySelector('.js-nav-menu'),
@@ -57,6 +57,7 @@ refs.gameListEl.addEventListener('click', e => {
   // TODO Якщо не знайшло такої гри то зробити запит на сервер
 
   saveToLS('currentGame', currentGame);
+  
   window.location.pathname = `${HOST}game-info.html`;
 });
 

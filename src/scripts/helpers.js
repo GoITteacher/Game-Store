@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 export function saveToLS(key, value) {
   localStorage.setItem(key, JSON.stringify(value));

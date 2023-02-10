@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import uniqid from 'uniqid';
 faker.locale = 'en';
 
 import { saveToLS, loadFromLS } from '../../scripts/helpers.js';
@@ -11,6 +12,7 @@ const TABLES = {
 export class DataBase {
   static #limit = 20;
   static page = 1;
+  static #online = true;
 
   static createGame(game) {
     if (!game) game = randomGame();
@@ -19,11 +21,26 @@ export class DataBase {
   }
 
   static async getGame(id) {
-    const game = await DynamoAPI.getItem(TABLES.game, id);
-    return game;
+    if (DataBase.online) {
+      const game = await DynamoAPI.getItem(TABLES.game, id);
+      return game;
+    } else {
+      const game = randomGame();
+      game.id = uniqid();
+      return;
+    }
   }
 
   static async getGames(page) {
+    if (!DataBase.online) {
+      const games = [];
+      for (let i = 0; i < DataBase.#limit; i++) {
+        games[i] = randomGame();
+        games[i].id = uniqid();
+      }
+      return games;
+    }
+
     if (page) DataBase.page = page;
     try {
       const games = await DynamoAPI.getData(

@@ -51,41 +51,23 @@ refs.gameListEl.addEventListener('click', e => {
   if (e.target === e.currentTarget) return;
   const gameEl = e.target.closest('[data-id]');
   const games = loadFromLS('allGames') || [];
-  const currentGame = games.find(el => el.id === gameEl.dataset.id);
-  console.log(currentGame);
+  const currentGame = GAMES.find(el => el.id === gameEl.dataset.id);
+  // console.log(games, gameEl);
   // TODO Якщо не знайшло такої гри то зробити запит на сервер
-
   saveToLS('currentGame', currentGame);
-  
-  window.location.pathname = `${HOST || "/Game-Store/"}game-info.html`;
+  window.location.pathname = `${HOST || '/Game-Store/'}game-info.html`;
 });
 
 function renderGame(games, reset = true) {
   const elems = refs.navMenuElem.querySelectorAll('[name]');
-  const gameName = elems[0].value;
   const gameSort = elems[1].value;
-  const gameGenre = elems[2].value;
-  const gameRating = elems[3].value;
 
   if (gameSort != 'null') {
     reset = true;
     games = GAMES;
   }
-  if (gameName) games = games.filter(el => el.name.includes(gameName));
-  if (gameGenre != 'null')
-    games = games.filter(el => el.genres.includes(gameGenre));
-  if (gameRating != 'null')
-    games = games.filter(el => Math.round(+el.rating) === +gameRating);
 
-  if (gameSort != 'null') {
-    games = [...games].sort((a, b) => {
-      if (gameSort === 'name') {
-        return a[gameSort].localeCompare(b[gameSort]);
-      } else {
-        return Number(a[gameSort]) - Number(b[gameSort]);
-      }
-    });
-  }
+  games = sortArray(games);
 
   if (reset) refs.gameListEl.innerHTML = '';
   if (games.length) {
@@ -116,7 +98,33 @@ async function onWindowScroll(e) {
     if (games.length !== 0) {
       isActiveQuery = false;
       GAMES.push(...games);
+      console.log(GAMES);
       renderGame(games, false);
     } else document.removeEventListener('scroll', onWindowScroll);
   }
+}
+
+function sortArray(games) {
+  const elems = refs.navMenuElem.querySelectorAll('[name]');
+  const gameName = elems[0].value;
+  const gameSort = elems[1].value;
+  const gameGenre = elems[2].value;
+  const gameRating = elems[3].value;
+  if (gameName) games = games.filter(el => el.name.includes(gameName));
+  if (gameGenre != 'null')
+    games = games.filter(el => el.genres.includes(gameGenre));
+  if (gameRating != 'null')
+    games = games.filter(el => Math.round(+el.rating) === +gameRating);
+
+  if (gameSort != 'null') {
+    games = [...games].sort((a, b) => {
+      if (gameSort === 'name') {
+        return a[gameSort].localeCompare(b[gameSort]);
+      } else {
+        return Number(a[gameSort]) - Number(b[gameSort]);
+      }
+    });
+  }
+
+  return games;
 }

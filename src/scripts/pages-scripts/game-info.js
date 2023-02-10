@@ -29,6 +29,7 @@ const gamesElem = {
 
 const CONSTANTS = {
   isFullInfo: false,
+  isAuthorized: loadFromLS('isAuthorized'),
 };
 
 // ============================================
@@ -54,7 +55,6 @@ let currentGame;
 async function onLoadPage() {
   let gameId = window.location.search.replace('?id=', '');
   currentGame = loadFromLS('currentGame');
-
   if (!currentGame && gameId == '') {
     window.location.pathname = HOST;
   } else if (!currentGame) {
@@ -70,8 +70,6 @@ async function onLoadPage() {
 onLoadPage();
 
 function loadInfo(game) {
-  console.log(game);
-
   gamesElem.gameDesc.innerHTML = `<p>${game.desc
     .split('\n')
     .join('. </p><p>')}</p>`;
@@ -105,3 +103,4 @@ function loadInfo(game) {
   createGallery(game.images);
   setRating(game.rating || (Math.random() * 5).toFixed(1));
 }
+// ============================================

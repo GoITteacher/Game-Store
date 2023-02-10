@@ -28,3 +28,11 @@ export function formatDate(date) {
 export const sha256 = data => {
   return crypto.createHash('sha256').update(data, 'utf8').digest('hex');
 };
+
+export function isAuthorized() {
+  const isAuthorized = loadFromLS('isAuthorized');
+  if (isAuthorized === undefined) {
+    saveToLS('isAuthorized', false);
+  }
+  return isAuthorized || false;
+}

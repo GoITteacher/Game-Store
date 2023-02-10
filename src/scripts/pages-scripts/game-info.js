@@ -2,7 +2,7 @@ import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 import { createGallery } from '../../modules/gallery';
-import { formatDate, loadFromLS, saveToLS } from '../helpers';
+import { formatDate, loadFromLS, saveToLS, isAuthorized } from '../helpers';
 import { setRating } from '../../modules/stars';
 import { DataBase } from '../../modules/database';
 import { HOST } from '../constants';
@@ -12,6 +12,9 @@ import specTemplate from '../../templates/spec-template.hbs';
 
 const refs = {
   loadMoreInfo: document.querySelector('.js-btn-more-info'),
+  buyBtnElem: document.querySelector('.js-buy-btn'),
+  cartBtnElem: document.querySelector('.js-cart-btn'),
+  washListBtnElem: document.querySelector('.js-washlist-btn'),
 };
 
 const gamesElem = {
@@ -70,6 +73,7 @@ async function onLoadPage() {
 onLoadPage();
 
 function loadInfo(game) {
+  restyleButtons(game);
   gamesElem.gameDesc.innerHTML = `<p>${game.desc
     .split('\n')
     .join('. </p><p>')}</p>`;
@@ -104,3 +108,55 @@ function loadInfo(game) {
   setRating(game.rating || (Math.random() * 5).toFixed(1));
 }
 // ============================================
+
+refs.cartBtnElem.addEventListener('click', () => {
+  if (!isAuthorized()) {
+  }
+  let cartList = loadFromLS('cartList') || [];
+  const game = loadFromLS('currentGame') || {};
+
+  if (cartList.find(el => el.id === game.id)) {
+    cartList = cartList.filter(el => el.id !== game.id);
+    saveToLS('cartList', cartList);
+  } else {
+    cartList.push(game);
+    saveToLS('cartList', cartList);
+  }
+
+  restyleButtons(game);
+});
+
+refs.washListBtnElem.addEventListener('click', () => {
+  let washList = loadFromLS('washList') || [];
+  const game = loadFromLS('currentGame') || {};
+
+  if (washList.find(el => el.id === game.id)) {
+    washList = washList.filter(el => el.id !== game.id);
+    saveToLS('washList', washList);
+  } else {
+    washList.push(game);
+    saveToLS('washList', washList);
+  }
+
+  restyleButtons(game);
+});
+
+function restyleButtons(game) {
+  const cartList = loadFromLS('cartList') || [];
+  const washList = loadFromLS('washList') || [];
+
+  if (!game) game = loadFromLS('currentGame');
+  if (!game) return;
+
+  if (cartList.find(el => el.id === game.id)) {
+    refs.cartBtnElem.textContent = 'Remove from Cart';
+  } else {
+    refs.cartBtnElem.textContent = 'Add to Cart';
+  }
+
+  if (washList.find(el => el.id === game.id)) {
+    refs.washListBtnElem.textContent = 'Remove from WashList';
+  } else {
+    refs.washListBtnElem.textContent = 'Add to WashList';
+  }
+}

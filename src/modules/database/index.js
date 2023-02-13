@@ -7,6 +7,7 @@ import { DynamoAPI } from './dynamodb.js';
 
 const TABLES = {
   game: 'GameStore-games',
+  users: 'GameStore-users'
 };
 
 export class DataBase {
@@ -21,18 +22,18 @@ export class DataBase {
   }
 
   static async getGame(id) {
-    if (DataBase.online) {
+    if (DataBase.#online) {
       const game = await DynamoAPI.getItem(TABLES.game, id);
       return game;
     } else {
       const game = randomGame();
       game.id = uniqid();
-      return;
+      return game;
     }
   }
 
   static async getGames(page) {
-    if (!DataBase.online) {
+    if (!DataBase.#online) {
       const games = [];
       for (let i = 0; i < DataBase.#limit; i++) {
         games[i] = randomGame();
@@ -48,11 +49,32 @@ export class DataBase {
         DataBase.page,
         DataBase.#limit
       );
-      saveToLS('allGames', games);
       return games;
     } catch (err) {
       console.log(err);
       return [];
+    }
+  }
+
+
+  static async getUsers(){
+    try {
+      const users = await DynamoAPI.getAllItems(TABLES.users);
+      saveToLS('users', users)
+      return users;
+    } catch (err) {
+      console.log(err);
+      return [];
+    }
+  }
+
+  static async createUser(user){
+    try{
+      const id = await DynamoAPI.createItem(TABLES.users, user);
+      user.id = id;
+      return id;
+    }catch (err){
+
     }
   }
 }

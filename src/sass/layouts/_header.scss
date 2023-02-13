@@ -45,11 +45,31 @@
    display: flex;
    justify-content: flex-end;
    align-items: center;
+   padding-right: 30px;
 
-   a{
-      margin: 0;
-      padding: 2vh;
+   a,
+   button {
+      margin: 0 10px;
+      padding: 0;
       color: $text-gray;
       transition: all 200ms;
+      width: fit-content;
+      font-size: large;
+      cursor: pointer;
+
+      img {
+         object-fit: cover;
+         width: 40px;
+         height: 40px;
+
+         &:hover {
+            filter: grayscale(100%) invert(30%) hue-rotate(116deg);
+            ;
+            -webkit-filter: grayscale(100%) invert(30%) hue-rotate(116deg);
+            ;
+            -moz-filter: grayscale(100%) invert(30%) hue-rotate(116deg);
+            ;
+         }
+      }
    }
 }

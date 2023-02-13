@@ -89,7 +89,14 @@ export class DynamoAPI {
     return data.Items;
   }
 
-  static async getAllItems() {}
+  static async getAllItems(table) {
+    const params = {
+      TableName: table
+    };
+
+    const data = await docClient.scan(params).promise();
+    return data.Items;
+  }
 
   static async getData(table, page, pageSize) {
     const params = {

@@ -6,6 +6,7 @@ const refs = {
   logOut: document.querySelector('.js-logout'),
   cartList: document.querySelector('.js-cart-link'),
   wishList: document.querySelector('.js-wishlist-link'),
+  storeLink: document.querySelector('.js-store-link'),
 };
 
 function checkAuth() {
@@ -29,8 +30,33 @@ refs.logOut.addEventListener('click', e => {
   saveToLS('isAuthorized', false);
   localStorage.removeItem('user');
   checkAuth();
+  if (window.location.pathname.includes('cart.html')) {
+    const origin = window.location.origin;
+    const newUrl = `${origin}${HOST}`;
+    window.location.replace(newUrl);
+  }
 });
 
 refs.cartList.addEventListener('click', () => {
-  window.location.pathname = { HOST };
+  console.log(window.location);
+  const origin = window.location.origin;
+  const newUrl = `${origin}${HOST}cart.html?cart`;
+  window.location.replace(newUrl);
 });
+
+function checkActiveLink() {
+  const path = window.location.pathname;
+  const search = window.location.search;
+
+  if (search.includes('cart')) {
+    refs.cartList.classList.add('active-link');
+  } else if (search.includes('wishList')) {
+    refs.cartList.classList.add('active-link');
+  } else if (path.includes('game-info')) {
+    // refs.storeLink.classList.add('active-link');
+  } else {
+    refs.storeLink.classList.add('active-link');
+  }
+}
+
+checkActiveLink();

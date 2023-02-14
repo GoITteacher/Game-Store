@@ -1,7 +1,6 @@
 .header-container {
    width: 100vw;
-   min-height: 30px;
-   height: 8vh;
+   height: 60px;
    background-color: $bg-secondary;
    display: flex;
    padding: 0 10px;
@@ -24,16 +23,18 @@
    align-items: center;
    justify-content: start;
 
-   a {
+   a,button {
+      min-height: 60px;
       margin: 0;
       padding: 2vh;
       color: $text-gray;
       transition: all 200ms;
+      font-size: large;
+      cursor: pointer;
    }
 
-   ;
 
-   a:hover,
+   a:hover, button:hover,
    .active-link {
       border-bottom: 3px solid $primary;
    }

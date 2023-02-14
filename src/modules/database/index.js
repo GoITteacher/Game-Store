@@ -22,6 +22,10 @@ export class DataBase {
   }
 
   static async getGame(id) {
+    const games = loadFromLS('games') || [];
+    let game = games.find(el => el.id === id);
+    if (game) return game;
+
     if (DataBase.#online) {
       const game = await DynamoAPI.getItem(TABLES.game, id);
       return game;

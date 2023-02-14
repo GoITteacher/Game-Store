@@ -37,6 +37,7 @@ let GAMES = [
 async function loadGames() {
   const games = await DataBase.getGames(1);
   GAMES = games;
+  saveToLS('games', games);
   if (games.length) {
     refs.gameListEl.innerHTML = games.map(gameTemplate).join('');
   } else {
@@ -95,7 +96,7 @@ async function onWindowScroll(e) {
     if (games.length !== 0) {
       isActiveQuery = false;
       GAMES.push(...games);
-      console.log(GAMES);
+      saveToLS('games', GAMES);
       renderGame(games, false);
     } else document.removeEventListener('scroll', onWindowScroll);
   }

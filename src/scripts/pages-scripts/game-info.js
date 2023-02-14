@@ -111,6 +111,8 @@ function loadInfo(game) {
 
 refs.cartBtnElem.addEventListener('click', () => {
   if (!isAuthorized()) {
+    window.location.pathname = `${HOST}/auth.html`;
+    return;
   }
   let cartList = loadFromLS('cartList') || [];
   const game = loadFromLS('currentGame') || {};
@@ -127,6 +129,11 @@ refs.cartBtnElem.addEventListener('click', () => {
 });
 
 refs.washListBtnElem.addEventListener('click', () => {
+  if (!isAuthorized()) {
+    window.location.pathname = `${HOST || '/Game-Store/'}/auth.html`;
+    return;
+  }
+
   let washList = loadFromLS('washList') || [];
   const game = loadFromLS('currentGame') || {};
 

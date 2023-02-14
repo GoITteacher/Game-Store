@@ -12,6 +12,7 @@ authFormElem.addEventListener('submit', async e => {
   const isCorrect = await Auth.isCorrectPassword(login, password);
 
   if (isCorrect) {
+    Auth.authorized(login, password);
     window.location.pathname = `${HOST}`;
   } else {
     showError('Login or Password is not correct!');

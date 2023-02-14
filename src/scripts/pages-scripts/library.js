@@ -55,7 +55,7 @@ refs.gameListEl.addEventListener('click', e => {
   // console.log(games, gameEl);
   // TODO Якщо не знайшло такої гри то зробити запит на сервер
   saveToLS('currentGame', currentGame);
-  window.location.pathname = `${HOST || '/Game-Store/'}game-info.html`;
+  window.location.pathname = `${HOST}game-info.html`;
 });
 
 function renderGame(games, reset = true) {

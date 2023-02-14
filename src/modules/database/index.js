@@ -7,13 +7,13 @@ import { DynamoAPI } from './dynamodb.js';
 
 const TABLES = {
   game: 'GameStore-games',
-  users: 'GameStore-users'
+  users: 'GameStore-users',
 };
 
 export class DataBase {
   static #limit = 20;
   static page = 1;
-  static #online = true;
+  static #online = false;
 
   static createGame(game) {
     if (!game) game = randomGame();
@@ -53,28 +53,6 @@ export class DataBase {
     } catch (err) {
       console.log(err);
       return [];
-    }
-  }
-
-
-  static async getUsers(){
-    try {
-      const users = await DynamoAPI.getAllItems(TABLES.users);
-      saveToLS('users', users)
-      return users;
-    } catch (err) {
-      console.log(err);
-      return [];
-    }
-  }
-
-  static async createUser(user){
-    try{
-      const id = await DynamoAPI.createItem(TABLES.users, user);
-      user.id = id;
-      return id;
-    }catch (err){
-
     }
   }
 }

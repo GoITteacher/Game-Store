@@ -1,0 +1,65 @@
+.cart-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .cart-list{
+        width: 90%;
+
+        &>li{
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            height: fit-content;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+
+            .game-img{
+                width: 150px;
+                height: 200px;
+                overflow: hidden;
+                border-radius: 5px;
+                align-items: center;
+                align-content: center;
+                display: flex;
+                justify-content: center;
+
+                img{
+                    height: 100%;
+                    object-fit: cover;
+                    overflow: hidden;
+                }
+            }
+
+            .cart-info{
+                margin: 0 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: flex-start;
+                width: fit-content;
+                max-width: 500px;
+                max-height: 200px;
+                overflow: hidden;
+
+                span{
+                    color:$text-gray;
+                    margin:5px 0;
+                    font-size: large;
+                }
+
+                :nth-child(1){
+                    color:$text;
+                    font-size: xx-large;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        &>li:hover{
+            background-color: $bg-secondary;
+        }
+    }
+}

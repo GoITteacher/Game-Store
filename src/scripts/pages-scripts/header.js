@@ -1,4 +1,4 @@
-import { isAuthorized, saveToLS } from '../helpers.js';
+import { isAuthorized, redirect, saveToLS } from '../helpers.js';
 import { HOST } from '../constants.js';
 
 const refs = {
@@ -31,17 +31,15 @@ refs.logOut.addEventListener('click', e => {
   localStorage.removeItem('user');
   checkAuth();
   if (window.location.pathname.includes('cart.html')) {
-    const origin = window.location.origin;
-    const newUrl = `${origin}${HOST}`;
-    window.location.replace(newUrl);
+    redirect();
   }
 });
 
 refs.cartList.addEventListener('click', () => {
-  console.log(window.location);
-  const origin = window.location.origin;
-  const newUrl = `${origin}${HOST}cart.html?cart`;
-  window.location.replace(newUrl);
+  redirect('cart.html', '?cart');
+});
+refs.wishList.addEventListener('click', () => {
+  redirect('cart.html', '?wishlist');
 });
 
 function checkActiveLink() {
@@ -50,8 +48,8 @@ function checkActiveLink() {
 
   if (search.includes('cart')) {
     refs.cartList.classList.add('active-link');
-  } else if (search.includes('wishList')) {
-    refs.cartList.classList.add('active-link');
+  } else if (search.includes('wishlist')) {
+    refs.wishList.classList.add('active-link');
   } else if (path.includes('game-info')) {
     // refs.storeLink.classList.add('active-link');
   } else {

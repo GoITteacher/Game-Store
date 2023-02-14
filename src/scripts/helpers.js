@@ -39,7 +39,9 @@ export function isAuthorized() {
 }
 
 export function redirect(url = '', params = '') {
+  const link = document.createElement('a');
   const origin = window.location.origin;
   const newUrl = `${origin}${HOST}${url}${params}`;
-  window.location.replace(newUrl);
+  link.href = newUrl;
+  link.click();
 }

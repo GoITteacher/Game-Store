@@ -20,7 +20,7 @@ const refs = {
   loadMoreInfo: document.querySelector('.js-btn-more-info'),
   buyBtnElem: document.querySelector('.js-buy-btn'),
   cartBtnElem: document.querySelector('.js-cart-btn'),
-  washListBtnElem: document.querySelector('.js-washlist-btn'),
+  wishListBtnElem: document.querySelector('.js-wishlist-btn'),
 };
 
 const gamesElem = {
@@ -63,7 +63,7 @@ refs.loadMoreInfo.addEventListener('click', e => {
 let currentGame;
 async function onLoadPage() {
   let gameId = window.location.search.replace('?id=', '');
-  currentGame = loadFromLS('currentGame');
+  // currentGame = loadFromLS('currentGame');
   if (!currentGame && gameId == '') {
     redirect();
   } else if (!currentGame) {
@@ -134,21 +134,21 @@ refs.cartBtnElem.addEventListener('click', () => {
   restyleButtons(game);
 });
 
-refs.washListBtnElem.addEventListener('click', () => {
+refs.wishListBtnElem.addEventListener('click', () => {
   if (!isAuthorized()) {
     redirect('auth.html');
     return;
   }
 
-  let washList = loadFromLS('washList') || [];
+  let wishList = loadFromLS('wishList') || [];
   const game = loadFromLS('currentGame') || {};
 
-  if (washList.find(el => el.id === game.id)) {
-    washList = washList.filter(el => el.id !== game.id);
-    saveToLS('washList', washList);
+  if (wishList.find(el => el.id === game.id)) {
+    wishList = wishList.filter(el => el.id !== game.id);
+    saveToLS('wishList', wishList);
   } else {
-    washList.push(game);
-    saveToLS('washList', washList);
+    wishList.push(game);
+    saveToLS('wishList', wishList);
   }
 
   restyleButtons(game);
@@ -156,7 +156,7 @@ refs.washListBtnElem.addEventListener('click', () => {
 
 function restyleButtons(game) {
   const cartList = loadFromLS('cartList') || [];
-  const washList = loadFromLS('washList') || [];
+  const wishList = loadFromLS('wishList') || [];
 
   if (!game) game = loadFromLS('currentGame');
   if (!game) return;
@@ -167,9 +167,9 @@ function restyleButtons(game) {
     refs.cartBtnElem.textContent = 'Add to Cart';
   }
 
-  if (washList.find(el => el.id === game.id)) {
-    refs.washListBtnElem.textContent = 'Remove from WashList';
+  if (wishList.find(el => el.id === game.id)) {
+    refs.wishListBtnElem.textContent = 'Remove from wishList';
   } else {
-    refs.washListBtnElem.textContent = 'Add to WashList';
+    refs.wishListBtnElem.textContent = 'Add to wishList';
   }
 }

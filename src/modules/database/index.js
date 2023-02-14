@@ -13,7 +13,7 @@ const TABLES = {
 export class DataBase {
   static #limit = 20;
   static page = 1;
-  static #online = false;
+  static #online = true;
 
   static createGame(game) {
     if (!game) game = randomGame();

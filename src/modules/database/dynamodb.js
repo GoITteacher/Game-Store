@@ -62,7 +62,6 @@ export class DynamoAPI {
   static async getItem(table, id, nameColumn = 'id') {
     const params = {
       TableName: table,
-      IndexName: 'LoginIndex',
       KeyConditionExpression: `#${nameColumn} = :${nameColumn}`,
       ExpressionAttributeNames: {
         [`#${nameColumn}`]: nameColumn,
@@ -91,7 +90,7 @@ export class DynamoAPI {
 
   static async getAllItems(table) {
     const params = {
-      TableName: table
+      TableName: table,
     };
 
     const data = await docClient.scan(params).promise();

@@ -1,7 +1,6 @@
 import gameTemplate from '../../templates/game-template.hbs';
 import { DataBase } from '../../modules/database/index.js';
-import { loadFromLS, saveToLS } from '../helpers';
-import { HOST } from '../constants';
+import { loadFromLS, redirect, saveToLS } from '../helpers';
 const refs = {
   gameListEl: document.querySelector('.js-game-list'),
   navMenuElem: document.querySelector('.js-nav-menu'),
@@ -53,9 +52,7 @@ refs.gameListEl.addEventListener('click', e => {
   const currentGame = GAMES.find(el => el.id === gameEl.dataset.id);
   // TODO Якщо не знайшло такої гри то зробити запит на сервер
   saveToLS('currentGame', currentGame);
-  const origin = window.location.origin;
-  const newUrl = `${origin}${HOST}game-info.html?id=${currentGame.id}`;
-  window.location.replace(newUrl);
+  redirect('game-info.html', `?id=${currentGame.id}`);
 });
 
 function renderGame(games, reset = true) {

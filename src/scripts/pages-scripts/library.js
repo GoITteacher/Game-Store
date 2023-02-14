@@ -50,12 +50,12 @@ loadGames();
 refs.gameListEl.addEventListener('click', e => {
   if (e.target === e.currentTarget) return;
   const gameEl = e.target.closest('[data-id]');
-  const games = loadFromLS('allGames') || [];
   const currentGame = GAMES.find(el => el.id === gameEl.dataset.id);
-  // console.log(games, gameEl);
   // TODO Якщо не знайшло такої гри то зробити запит на сервер
   saveToLS('currentGame', currentGame);
-  window.location.pathname = `${HOST}game-info.html`;
+  const origin = window.location.origin;
+  const newUrl = `${origin}${HOST}game-info.html?id=${currentGame.id}`;
+  window.location.replace(newUrl);
 });
 
 function renderGame(games, reset = true) {

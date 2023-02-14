@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { HOST } from './constants.js';
 
 export function saveToLS(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
@@ -35,4 +36,10 @@ export function isAuthorized() {
     saveToLS('isAuthorized', false);
   }
   return isAuthorized || false;
+}
+
+export function redirect(url = '', params = '') {
+  const origin = window.location.origin;
+  const newUrl = `${origin}${HOST}${url}${params}`;
+  window.location.replace(newUrl);
 }

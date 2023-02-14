@@ -1,6 +1,7 @@
 import { showError } from '../../modules/notiflix';
 import { HOST } from '../constants';
 import { Auth } from '../../modules/auth';
+import { redirect } from '../helpers';
 
 const authFormElem = document.querySelector('.js-auth-form');
 
@@ -13,7 +14,7 @@ authFormElem.addEventListener('submit', async e => {
 
   if (isCorrect) {
     Auth.authorized(login, password);
-    window.location.pathname = `${HOST}`;
+    redirect();
   } else {
     showError('Login or Password is not correct!');
   }

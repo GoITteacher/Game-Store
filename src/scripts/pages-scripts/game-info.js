@@ -2,7 +2,13 @@ import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 import { createGallery } from '../../modules/gallery';
-import { formatDate, loadFromLS, saveToLS, isAuthorized } from '../helpers';
+import {
+  formatDate,
+  loadFromLS,
+  saveToLS,
+  isAuthorized,
+  redirect,
+} from '../helpers';
 import { setRating } from '../../modules/stars';
 import { DataBase } from '../../modules/database';
 import { HOST } from '../constants';
@@ -59,7 +65,7 @@ async function onLoadPage() {
   let gameId = window.location.search.replace('?id=', '');
   currentGame = loadFromLS('currentGame');
   if (!currentGame && gameId == '') {
-    window.location.pathname = HOST;
+    redirect();
   } else if (!currentGame) {
     currentGame = await DataBase.getGame(gameId);
     saveToLS('currentGame', currentGame);
@@ -111,7 +117,7 @@ function loadInfo(game) {
 
 refs.cartBtnElem.addEventListener('click', () => {
   if (!isAuthorized()) {
-    window.location.pathname = `${HOST}/auth.html`;
+    redirect('auth.html');
     return;
   }
   let cartList = loadFromLS('cartList') || [];
@@ -130,7 +136,7 @@ refs.cartBtnElem.addEventListener('click', () => {
 
 refs.washListBtnElem.addEventListener('click', () => {
   if (!isAuthorized()) {
-    window.location.pathname = `${HOST || '/Game-Store/'}/auth.html`;
+    redirect('auth.html');
     return;
   }
 

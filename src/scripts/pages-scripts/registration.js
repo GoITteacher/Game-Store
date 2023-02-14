@@ -1,6 +1,7 @@
 import { showError } from '../../modules/notiflix';
 import { HOST } from '../constants';
 import { Auth } from '../../modules/auth';
+import { redirect } from '../helpers';
 
 const authFormElem = document.querySelector('.js-auth-form');
 
@@ -41,6 +42,6 @@ authFormElem.addEventListener('submit', async e => {
 
   await Auth.createUser(user);
   setTimeout(() => {
-    window.location.pathname = `${HOST}auth.html`;
+    redirect('auth.html');
   }, 100);
 });

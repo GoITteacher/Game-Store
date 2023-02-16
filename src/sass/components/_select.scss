@@ -16,3 +16,61 @@ select.custom-select {
 select::-ms-expand {
   display: none;
 }
+
+.custom-select {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 70px;
+  overflow: hidden;
+  cursor: pointer;
+
+  &>:nth-child(1) {
+    margin-bottom: 20px;
+    color: $text;
+    width: fit-content;
+  }
+}
+
+.custom-select input {
+
+  width: fit-content;
+  margin: 5px;
+  height: fit-content;
+  font-size: small;
+  margin-right: 10px;
+
+  &:valid {
+    box-shadow: none !important;
+  }
+}
+
+.open-select {
+  animation: openSelect 5s ease-in-out;
+}
+
+.close-select {
+  animation: closeSelect 5s ease-in-out;
+}
+
+
+@keyframes openSelect {
+  from {
+    height: 70px;
+  }
+
+  to {
+    height: 500px;
+  }
+}
+
+
+@keyframes closeSelect {
+  from {
+    height: 500px;
+  }
+
+  to {
+    height: 70px;
+  }
+}

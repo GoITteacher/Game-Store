@@ -17,16 +17,25 @@ select::-ms-expand {
 }
 
 .select {
+  color: $text;
+  outline: none;
+  border-radius: 10px;
+  font-size: medium;
+
+  padding: 10px;
+  text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   height: 70px;
+  width: 100%;
   overflow: hidden;
   cursor: pointer;
 
   &>:nth-child(1) {
     margin-bottom: 20px;
-    color: $text;
+    color: $text-gray;
     width: fit-content;
   }
 }

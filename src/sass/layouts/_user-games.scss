@@ -11,8 +11,7 @@
 
     input[type]:not([type='checkbox']),
     textarea,
-    .custom-select {
-        color: #f5f5f5;
+    .select {
         background: none;
         border: none;
         border-radius: 1rem;
@@ -42,9 +41,10 @@
         }
     }
 
-    .custom-select {
-        background-color: $bg-secondary;
+    .select {
+        border: 1px solid black;
         width: 100%;
+        margin: 5px 0;
 
         span {
             color: $text-gray;

@@ -4,8 +4,7 @@ select.custom-select {
   border-radius: 10px;
   font-size: medium;
   min-width: 150px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  height: fit-content;
   appearance: none;
   padding: 10px;
   text-align: center;
@@ -17,7 +16,7 @@ select::-ms-expand {
   display: none;
 }
 
-.custom-select {
+.select {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,7 +31,7 @@ select::-ms-expand {
   }
 }
 
-.custom-select input {
+.select input {
 
   width: fit-content;
   margin: 5px;

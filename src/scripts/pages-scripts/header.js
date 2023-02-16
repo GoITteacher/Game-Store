@@ -47,6 +47,9 @@ refs.wishList.addEventListener('click', () => {
 refs.userGamesLink.addEventListener('click', () => {
   redirect('user-games.html');
 });
+refs.storeLink.addEventListener('click', () => {
+  redirect();
+});
 
 function checkActiveLink() {
   const path = window.location.pathname;

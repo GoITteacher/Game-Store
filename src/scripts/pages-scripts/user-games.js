@@ -12,6 +12,7 @@ function initModal() {
     document.body.classList.add('show');
     document.addEventListener('keydown', onClose);
   }
+
   function onClose(e) {
     if (e.key == 'Escape') {
       closeModal();

@@ -19,6 +19,7 @@ function onLoadPage() {
 
   if (!games || !games.length) {
     refs.errorElem.classList.remove('hide');
+    return;
   }
 
   refs.listElem.innerHTML = games.map(gamesTemplate).join('');

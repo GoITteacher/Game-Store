@@ -17,9 +17,10 @@ function onLoadPage() {
     games = loadFromLS('wishList');
   }
 
-  if (!games.length) {
+  if (!games || !games.length) {
     refs.errorElem.classList.remove('hide');
   }
+
   refs.listElem.innerHTML = games.map(gamesTemplate).join('');
 }
 

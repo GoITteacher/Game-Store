@@ -51,3 +51,30 @@
         }
     }
 }
+
+.empty-page{
+    margin:auto auto;
+    height: fit-content;
+    max-width: 700px;
+    width: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $bg-secondary;
+    border-radius: 15px;
+    padding: 20px;
+
+    span{
+        font-size: xx-large;
+        text-align: center;
+        margin: 20px;
+    }
+
+    .btn{
+        max-width: 200px;
+        margin:20px
+    }
+}

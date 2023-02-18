@@ -5,6 +5,7 @@ import { loadFromLS, redirect } from '../helpers.js';
 
 const refs = {
   listElem: document.querySelector('.js-cart-list'),
+  errorElem: document.querySelector('.js-error-page'),
 };
 
 function onLoadPage() {
@@ -16,6 +17,9 @@ function onLoadPage() {
     games = loadFromLS('wishList');
   }
 
+  if (!games.length) {
+    refs.errorElem.classList.remove('hide');
+  }
   refs.listElem.innerHTML = games.map(gamesTemplate).join('');
 }
 

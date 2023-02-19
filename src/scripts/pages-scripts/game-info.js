@@ -110,7 +110,7 @@ function loadInfo(game) {
     }
   }
 
-  createGallery(game.images);
+  createGallery(game.media);
   setRating(game.rating || (Math.random() * 5).toFixed(1));
 }
 // ============================================

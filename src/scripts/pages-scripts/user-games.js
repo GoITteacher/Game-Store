@@ -1,6 +1,7 @@
 const refs = {
   addGameBtn: document.querySelector('.js-add-game'),
   backdrop: document.querySelector('.backdrop'),
+  createForm: document.querySelector('.js-create-form')
 };
 
 // =========== MODAL =================================
@@ -32,3 +33,8 @@ function initModal() {
 }
 initModal();
 // ====================================================
+
+refs.createForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  
+})

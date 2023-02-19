@@ -38,6 +38,7 @@ authFormElem.addEventListener('submit', async e => {
     login,
     email,
     password,
+    games:[]
   };
 
   await Auth.createUser(user);

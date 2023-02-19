@@ -32,6 +32,7 @@ refs.logOut.addEventListener('click', e => {
   e.preventDefault();
   saveToLS('isAuthorized', false);
   localStorage.removeItem('user');
+  localStorage.clear();
   checkAuth();
   if (window.location.pathname.includes('cart.html')) {
     redirect();

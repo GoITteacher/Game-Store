@@ -67,7 +67,7 @@ async function onLoadPage() {
   if (!currentGame && gameId == '') {
     redirect();
   } else if (!currentGame) {
-    currentGame = await DataBase.getGame(gameId);
+    currentGame = (await DataBase.getGame(gameId))[0];
     saveToLS('currentGame', currentGame);
   } else {
     // TODO
@@ -79,6 +79,7 @@ async function onLoadPage() {
 onLoadPage();
 
 function loadInfo(game) {
+  console.log(game);
   restyleButtons(game);
   gamesElem.gameDesc.innerHTML = `<p>${game.desc
     .split('\n')

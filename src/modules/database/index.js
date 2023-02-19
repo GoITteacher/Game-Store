@@ -15,13 +15,13 @@ export class DataBase {
   static page = 1;
   static #online = true;
 
-  static createGame(game) {
+  static async createGame(game) {
     if (!game) game = randomGame();
     console.log('Created', game);
-    DynamoAPI.createItem(TABLES.game, game);
+    return await DynamoAPI.createItem(TABLES.game, game);
   }
 
-  static async getGame(id) {
+  static async getGameById(id) {
     const games = loadFromLS('games') || [];
     let game = games.find(el => el.id === id);
     if (game) return game;
@@ -34,6 +34,22 @@ export class DataBase {
       game.id = uniqid();
       return game;
     }
+  }
+
+
+  static async deleteGame(id){
+    let games = loadFromLS('games') || [];
+    games = games.filter(game => game.id !== id);
+    saveToLS('games', games);
+
+    DynamoAPI.deleteItem(TABLES.game, id);
+  }
+
+  static async getGame(...gamesId){
+    const promises = gamesId.map(id=>{
+      return DataBase.getGameById(id)
+    });
+    return Promise.all(promises);
   }
 
   static async getGames(page) {
@@ -58,6 +74,20 @@ export class DataBase {
       console.log(err);
       return [];
     }
+  }
+
+  static addGameForUser(gameId){
+    const user = loadFromLS('user');
+    user.games.push(gameId);
+    saveToLS('user', user);
+    DynamoAPI.updateItem(TABLES.users, user.id, 'games', user.games);
+  }
+
+  static removeGameFromUser(gameId){
+    const user = loadFromLS('user');
+    user.games = user.games.filter(id => id !== gameId);
+    saveToLS('user', user);
+    DynamoAPI.updateItem(TABLES.users, user.id, 'games', user.games);
   }
 }
 

@@ -32,21 +32,25 @@ export class DynamoAPI {
     return randId;
   }
 
-  static async updateItem(table, id, item) {
-    let updateData = DynamoAPI.generateUpdateElem(item);
-
-    let params = {
-      TableName: table,
+  static async updateItem(tableName, itemId, attributeName, attributeValue) {
+    const params = {
+      TableName: tableName,
       Key: {
-        id: id,
+        "id": itemId
       },
-      UpdateExpression: updateData[0],
-      ExpressionAttributeValues: updateData[1],
+      UpdateExpression: `set ${attributeName} = :val`,
+      ExpressionAttributeValues: {
+        ":val": attributeValue
+      }
     };
-
-    docClient.update(params, (err, data) => {
-      console.log(err, data);
-    });
+  
+    try {
+      const result = await docClient.update(params).promise();
+      return result;
+    } catch (err) {
+      console.log(`Произошла ошибка при обновлении атрибута ${attributeName} элемента с ID ${itemId} в таблице ${tableName}:`, err);
+      throw err;
+    }
   }
 
   static async getItemById(table, id, nameColumn = 'id') {
@@ -138,16 +142,18 @@ export class DynamoAPI {
   }
 
   static generateUpdateElem(item) {
-    let result = 'set ';
-    let values = {};
+    //UpdateExpression
+    //ExpressionAttributeNames
+    //ExpressionAttributeValues
 
-    for (const key of Object.keys(item)) {
-      result += ` ${key} = :${key} ,`;
-      values[`:${key}`] = item[key];
+    const result = {
+      UpdateExpression: null,
+      ExpressionAttributeNames: null,
+      ExpressionAttributeValues: null,
     }
 
-    result = result.slice(0, result.length - 1);
 
-    return [result, values];
+
+    return result;
   }
 }

@@ -12,8 +12,7 @@ const genres = [
 ];
 
 const refs = {
-  genresElem: document.querySelector('.js-genres-list'),
-  form: document.querySelector('js-create-form'),
+  genresElem: document.querySelector('.js-genres-list')
 };
 
 function onLoadModal() {
@@ -21,16 +20,3 @@ function onLoadModal() {
 }
 
 onLoadModal();
-
-refs.form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const formData = new FormData(e.target);
-  const game = {};
-
-  for (let [key, value] of formData.entries()) {
-    game[key] = value;
-  }
-
-  console.log(game);
-});

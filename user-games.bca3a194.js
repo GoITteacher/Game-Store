@@ -1,2 +1,0 @@
-const e={addGameBtn:document.querySelector(".js-add-game"),backdrop:document.querySelector(".backdrop")};!function(){function t(e){"Escape"==e.key&&d()}function d(){document.body.classList.remove("show"),document.removeEventListener("keydown",t)}function d(){document.body.classList.remove("show")}e.addGameBtn.addEventListener("click",(()=>{document.body.classList.add("show"),document.addEventListener("keydown",t)})),e.backdrop.addEventListener("click",(e=>{e.target===e.currentTarget&&d()}))}();
-//# sourceMappingURL=user-games.bca3a194.js.map

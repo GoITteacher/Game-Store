@@ -52,11 +52,10 @@ refs.createForm.addEventListener('submit',async e => {
     game[key] = value;
   }
 
-  console.log(game);
-
   const gameId = await DataBase.createGame();
   DataBase.addGameForUser(gameId);
   renderGames();
+  document.body.classList.remove('show');
 });
 
 renderGames();

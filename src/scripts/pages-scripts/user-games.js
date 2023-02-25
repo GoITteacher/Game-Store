@@ -9,14 +9,15 @@ const refs = {
   backdrop: document.querySelector('.backdrop'),
   createForm: document.querySelector('.js-create-form'),
   errorPage: document.querySelector('.js-error-page'),
-  gamesListElem: document.querySelector('.js-cart-list')
+  gamesListElem: document.querySelector('.js-cart-list'),
+  addBtn: document.querySelector('.js-btn-add')
 };
 
 // =========== MODAL =================================
 function initModal() {
-  refs.addGameBtn.addEventListener('click', () => {
-    openModal();
-  });
+  refs.addGameBtn.addEventListener('click', openModal);
+  refs.addBtn.addEventListener('click',openModal)
+  
   function openModal() {
     document.body.classList.add('show');
     document.addEventListener('keydown', onClose);
@@ -65,9 +66,12 @@ async function renderGames(){
   if(games.length === 0){
     refs.gamesListElem.innerHTML = '';
     refs.errorPage.classList.remove('hide')
+    refs.addBtn.classList.add('hide');
     return;
   }
+  refs.addBtn.classList.remove('hide');
   refs.errorPage.classList.add('hide');
+  
 
   refs.gamesListElem.innerHTML = games.map(gamesTemplate).join('');;
 }
@@ -83,6 +87,7 @@ refs.gamesListElem.addEventListener('click', (e)=>{
   }
   
 })
+
 
 function deleteGame(gameId){
   DataBase.deleteGame(gameId);

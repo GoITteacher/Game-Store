@@ -10,14 +10,14 @@ const refs = {
   createForm: document.querySelector('.js-create-form'),
   errorPage: document.querySelector('.js-error-page'),
   gamesListElem: document.querySelector('.js-cart-list'),
-  addBtn: document.querySelector('.js-btn-add')
+  addBtn: document.querySelector('.js-btn-add'),
 };
 
 // =========== MODAL =================================
 function initModal() {
   refs.addGameBtn.addEventListener('click', openModal);
-  refs.addBtn.addEventListener('click',openModal)
-  
+  refs.addBtn.addEventListener('click', openModal);
+
   function openModal() {
     document.body.classList.add('show');
     document.addEventListener('keydown', onClose);
@@ -43,7 +43,7 @@ function initModal() {
 initModal();
 // ====================================================
 
-refs.createForm.addEventListener('submit',async e => {
+refs.createForm.addEventListener('submit', async e => {
   e.preventDefault();
 
   const formData = new FormData(e.target);
@@ -60,36 +60,33 @@ refs.createForm.addEventListener('submit',async e => {
 });
 
 renderGames();
-async function renderGames(){
-  const userGames = loadFromLS('user')?.games;
+async function renderGames() {
+  const userGames = loadFromLS('user')?.games || [];
   const games = await DataBase.getGame(...userGames);
-  if(games.length === 0){
+  if (games.length === 0) {
     refs.gamesListElem.innerHTML = '';
-    refs.errorPage.classList.remove('hide')
+    refs.errorPage.classList.remove('hide');
     refs.addBtn.classList.add('hide');
     return;
   }
   refs.addBtn.classList.remove('hide');
   refs.errorPage.classList.add('hide');
-  
 
-  refs.gamesListElem.innerHTML = games.map(gamesTemplate).join('');;
+  refs.gamesListElem.innerHTML = games.map(gamesTemplate).join('');
 }
 
-refs.gamesListElem.addEventListener('click', (e)=>{
-  if(e.target === e.currentTarget) return;
+refs.gamesListElem.addEventListener('click', e => {
+  if (e.target === e.currentTarget) return;
   const liElem = e.target.closest('li');
   const gameId = liElem.dataset.id;
 
-  if(e.target.nodeName === "BUTTON")deleteGame(gameId);
-  else{
+  if (e.target.nodeName === 'BUTTON') deleteGame(gameId);
+  else {
     redirect('game-info.html', `?id=${gameId}`);
   }
-  
-})
+});
 
-
-function deleteGame(gameId){
+function deleteGame(gameId) {
   DataBase.deleteGame(gameId);
   DataBase.removeGameFromUser(gameId);
   renderGames();

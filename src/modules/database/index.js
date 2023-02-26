@@ -4,7 +4,7 @@ faker.locale = 'en';
 
 import { saveToLS, loadFromLS } from '../../scripts/helpers.js';
 import { DynamoAPI } from './dynamodb.js';
-
+import IMAGES from './images.json';
 const TABLES = {
   game: 'GameStore-games',
   users: 'GameStore-users',
@@ -106,42 +106,8 @@ function randomGame() {
       minimum: generateSpec(),
       recommend: generateSpec(),
     },
-    images: [
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-    ],
-    media: [
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-      `https://source.unsplash.com/1920x1080/?random=${getRandom(
-        0,
-        9999
-      )}&game`,
-    ],
+    images: [Images.getImage(),Images.getImage(),Images.getImage()],
+    media: Images.getImages(),
     os: 'Windows',
     genres: [faker.music.genre(), faker.music.genre(), faker.music.genre()],
     desc: faker.lorem.paragraphs(6),
@@ -189,4 +155,27 @@ export function generateSpec() {
   }
 
   return result;
+}
+
+
+class Images{
+  static images = IMAGES;
+  static counter = 0;
+
+  static getImage(index){
+    if(index){
+      return Images.images[index];
+    }
+    index = ++Images.counter % Images.images.length;
+    return Images.images[index];
+  }
+
+  static getImages(){
+    const count = getRandom(3,7);
+    const result = [];
+    for(let i=0;i<count;i++){
+      result.push(Images.getImage(getRandom(0,Images.images.length-1)))
+    }
+    return result;
+  }
 }

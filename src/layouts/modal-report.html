@@ -1,16 +1,14 @@
 <div class="backdrop">
     <div class="modal">
-        <form action="https://api.web3forms.com/submit" method="POST">
+        <form class="create-form js-report-form" method="POST">
 
             <input type="hidden" name="access_key" value="87ed5e02-4775-48a0-a247-6c8c8ae0fb0b">
         
-            <input type="text" name="name" required>
-            <input type="email" name="email" required>
-            <textarea name="message" required></textarea>
-            <input type="hidden" name="redirect" value="https://web3forms.com/success">
+            <input type="text" name="name" required placeholder="Name">
+            <input type="email" name="email" required placeholder="Email">
+            <textarea name="message" required placeholder="Your message"></textarea>
         
-            <button type="submit">Submit Form</button>
-        
+            <button class="btn" type="submit">Send</button>
         </form>
     </div>
 </div>

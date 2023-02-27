@@ -1,6 +1,5 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
-
 import { createGallery } from '../../modules/gallery';
 import {
   formatDate,
@@ -13,6 +12,7 @@ import { setRating } from '../../modules/stars';
 import { DataBase } from '../../modules/database';
 import { HOST } from '../constants';
 import specTemplate from '../../templates/spec-template.hbs';
+import { Notify } from 'notiflix';
 
 // ============================================
 
@@ -21,6 +21,10 @@ const refs = {
   buyBtnElem: document.querySelector('.js-buy-btn'),
   cartBtnElem: document.querySelector('.js-cart-btn'),
   wishListBtnElem: document.querySelector('.js-wishlist-btn'),
+  reportBtn: document.querySelector('.js-report-btn'),
+  backdropElem: document.querySelector('.backdrop'),
+  reportForm: document.querySelector('.js-report-form'),
+  shareBtn: document.querySelector('.js-share-btn'),
 };
 
 const gamesElem = {
@@ -34,6 +38,8 @@ const gamesElem = {
   gamePrice: document.querySelector('.js-game-price'),
   minSpec: document.querySelector('.js-min-specs'),
   recommendSpec: document.querySelector('.js-recommend-specs'),
+  gamePoster: document.querySelector('.js-game-poster'),
+  gameImage: document.querySelector('.js-game-img'),
 };
 
 const CONSTANTS = {
@@ -79,7 +85,6 @@ async function onLoadPage() {
 onLoadPage();
 
 function loadInfo(game) {
-  console.log(game);
   restyleButtons(game);
   gamesElem.gameDesc.innerHTML = `<p>${game.desc
     .split('\n')
@@ -92,6 +97,8 @@ function loadInfo(game) {
   gamesElem.gamePlatform.textContent = game.os;
   gamesElem.gamePrice.textContent = game.price;
   gamesElem.gameRelease.textContent = formatDate(new Date(game.date_release));
+  gamesElem.gameImage.setAttribute('data-src', game.images[0]);
+  gamesElem.gamePoster.setAttribute('data-src', game.images[1]);
 
   if (game.specs) {
     const min = game.specs.minimum;
@@ -174,3 +181,44 @@ function restyleButtons(game) {
     refs.wishListBtnElem.textContent = 'Add to wishList';
   }
 }
+
+// ==============================================
+
+refs.reportBtn.addEventListener('click', () => {
+  document.body.classList.add('show');
+});
+refs.backdropElem.addEventListener('click', e => {
+  if (e.target === e.currentTarget) document.body.classList.remove('show');
+});
+
+refs.reportForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const data = {};
+  for (let [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  e.target.reset();
+  document.body.classList.remove('show');
+});
+
+refs.shareBtn.addEventListener('click', () => {
+  navigator.clipboard
+    .writeText(window.location.toString())
+    .then(() => {
+      Notify.info('Copied!');
+    })
+    .catch(err => {
+      console.log('Something went wrong', err);
+    });
+});

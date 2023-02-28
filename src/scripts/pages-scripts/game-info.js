@@ -1,5 +1,6 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+import {initPayPal} from './pay-pal.js';
 import { createGallery } from '../../modules/gallery';
 import {
   formatDate,
@@ -79,8 +80,9 @@ async function onLoadPage() {
     // TODO
     // window.location.search = `?id=${currentGame.id}`;
   }
-
+  initPayPal(currentGame.price);
   loadInfo(currentGame);
+  
 }
 onLoadPage();
 
@@ -186,6 +188,8 @@ function restyleButtons(game) {
 
 refs.reportBtn.addEventListener('click', () => {
   document.body.classList.add('show');
+  document.querySelector('.js-test').classList.add('hide');
+  refs.reportForm.classList.remove('hide');
 });
 refs.backdropElem.addEventListener('click', e => {
   if (e.target === e.currentTarget) document.body.classList.remove('show');
@@ -222,3 +226,10 @@ refs.shareBtn.addEventListener('click', () => {
       console.log('Something went wrong', err);
     });
 });
+
+
+refs.buyBtnElem.addEventListener('click',()=>{
+  document.body.classList.add('show');
+  document.querySelector('.js-test').classList.remove('hide');
+  refs.reportForm.classList.add('hide');
+})

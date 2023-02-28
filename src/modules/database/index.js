@@ -15,6 +15,27 @@ export class DataBase {
   static page = 1;
   static #online = true;
 
+  static async updateGames(){
+    const games = new Map();
+    const list = loadFromLS('games');
+    list.forEach(el=>{
+      games.set(el.id, el);
+    })
+
+    let counter = 0;
+    games.forEach(el=>{
+      if(el.genres.length === 0){
+        counter++;
+        setTimeout(()=>{
+          DynamoAPI.updateItem(TABLES.game, el.id, 'genres', fakeGenres());
+          console.log('updated');
+        }, counter*1000);
+      }
+    })
+    
+
+  }
+
   static async createGame(game) {
     if (!game) game = randomGame();
     console.log('Created', game);
@@ -109,7 +130,7 @@ function randomGame() {
     images: [Images.getImage(),Images.getImage(),Images.getImage()],
     media: Images.getImages(),
     os: 'Windows',
-    genres: [faker.music.genre(), faker.music.genre(), faker.music.genre()],
+    genres: fakeGenres(),
     desc: faker.lorem.paragraphs(6),
   };
 }
@@ -178,4 +199,16 @@ class Images{
     }
     return result;
   }
+}
+
+
+function fakeGenres(){
+  const genres = ['actions','adventure', 'rpg','shooters','strategies','survival'];
+  const len = Math.round(Math.random() * genres.length);
+  const result = new Set();
+  for(let i=0;i<len;i++){
+    const rand = Math.round(Math.random() * genres.length);
+    result.add(genres[rand]);
+  }
+  return Array.from(result);
 }

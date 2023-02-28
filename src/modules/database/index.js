@@ -28,7 +28,6 @@ export class DataBase {
         counter++;
         setTimeout(()=>{
           DynamoAPI.updateItem(TABLES.game, el.id, 'genres', fakeGenres());
-          console.log('updated');
         }, counter*1000);
       }
     })
@@ -38,7 +37,6 @@ export class DataBase {
 
   static async createGame(game) {
     if (!game) game = randomGame();
-    console.log('Created', game);
     return await DynamoAPI.createItem(TABLES.game, game);
   }
 
@@ -74,15 +72,18 @@ export class DataBase {
   }
 
   static async getGames(page) {
-    if (!DataBase.#online) {
-      const games = [];
-      for (let i = 0; i < DataBase.#limit; i++) {
-        games[i] = randomGame();
-        games[i].id = uniqid();
-      }
+    if (page) DataBase.page = page;
+    try {
+      if(page>1) return [];
+      const games = await DynamoAPI.getAllItems(TABLES.game);
       return games;
+    } catch (err) {
+      console.log(err);
+      return [];
     }
+  }
 
+  static async getGames1(page) {
     if (page) DataBase.page = page;
     try {
       const games = await DynamoAPI.getData(

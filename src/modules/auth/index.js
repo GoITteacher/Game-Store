@@ -8,7 +8,6 @@ export class Auth {
     user.password = Auth.#convert(user.password);
 
     if (user.login && user.email && user.password) {
-      console.log('created');
       DynamoAPI.createItem(TABLE_NAME, user);
     } else {
       console.log('Error user', user);

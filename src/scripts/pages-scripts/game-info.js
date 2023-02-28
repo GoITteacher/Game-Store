@@ -249,3 +249,14 @@ function succesPayPal(data){
   code.textContent = uniqid();
   showModal(refs.succesModal)
 }
+
+refs.succesModal.querySelector('h3').addEventListener('click',(e)=>{
+  navigator.clipboard
+    .writeText(e.target.textContent)
+    .then(() => {
+      Notify.info('Code Copied!');
+    })
+    .catch(err => {
+      console.log('Something went wrong', err);
+    });
+})

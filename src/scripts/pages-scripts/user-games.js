@@ -57,6 +57,7 @@ refs.createForm.addEventListener('submit', async e => {
   DataBase.addGameForUser(gameId);
   renderGames();
   document.body.classList.remove('show');
+  e.target.reset();
 });
 
 renderGames();

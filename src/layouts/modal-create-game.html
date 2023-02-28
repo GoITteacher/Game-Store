@@ -1,14 +1,13 @@
 <div class="backdrop">
     <div class="modal">
         <form class="create-form js-create-form">
-            <input name="game_name" type="text" placeholder="Game Name" minlength="5">
-            <input name="game_home" type="url" placeholder="Homepage (url)" minlength="5">
-            <input name="game_author" type="text" placeholder="Author" minlength="3">
-            <input name="game_publisher" type="text" placeholder="Publisher" minlength="3">
-            <div class="select js-genres-list">
-            </div>
-            <textarea name="game_desc" type="login" placeholder="Description" minlength="50"></textarea>
-
+            <input name="game_name" type="text" placeholder="Game Name" minlength="5" required>
+            <input name="game_home" type="url" placeholder="Homepage (url)" minlength="5" required>
+            <input name="game_author" type="text" placeholder="Author" minlength="3" required>
+            <input name="game_publisher" type="text" placeholder="Publisher" minlength="3" required>
+            <input name="game_os" type="text" placeholder="Operating system" minlength="3" required>
+            <input name="game_price" type="number" placeholder="Price (USD)" min="0" max="10000000" required>
+            <textarea name="game_desc" type="text" placeholder="Description" minlength="50"></textarea>
             <button class="btn btn-primary" type="submit">Add Game</button>
         </form>
     </div>

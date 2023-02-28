@@ -11,9 +11,8 @@ export function initPayPal(price){
         createOrder:(data,actions)=>{
             return actions.order.create({
                 purchase_units:[{
-                    amoun:{
-                        currency_code: 'UAH',
-                        value:price
+                    amount:{
+                        value: price
                     },
                     description: 'Purchase Unit test description',
                 }]
@@ -25,5 +24,9 @@ export function initPayPal(price){
                 console.log(res);
             })
         },
-      }).render('.js-test');
+
+        onClose:(data,actions)=>{
+            console.log('close');
+        },
+      }).render('.js-paypal');
 }

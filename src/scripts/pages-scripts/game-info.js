@@ -1,5 +1,6 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+import uniqid from 'uniqid';
 import {initPayPal} from './pay-pal.js';
 import { createGallery } from '../../modules/gallery';
 import {
@@ -26,6 +27,8 @@ const refs = {
   backdropElem: document.querySelector('.backdrop'),
   reportForm: document.querySelector('.js-report-form'),
   shareBtn: document.querySelector('.js-share-btn'),
+  paypalModal: document.querySelector('.js-paypal'),
+  succesModal: document.querySelector('.js-succes')
 };
 
 const gamesElem = {
@@ -80,7 +83,7 @@ async function onLoadPage() {
     // TODO
     // window.location.search = `?id=${currentGame.id}`;
   }
-  initPayPal(currentGame.price);
+  initPayPal(currentGame.price, succesPayPal);
   loadInfo(currentGame);
   
 }
@@ -187,10 +190,9 @@ function restyleButtons(game) {
 // ==============================================
 
 refs.reportBtn.addEventListener('click', () => {
-  document.body.classList.add('show');
-  document.querySelector('.js-test').classList.add('hide');
-  refs.reportForm.classList.remove('hide');
+  showModal(refs.reportForm)
 });
+
 refs.backdropElem.addEventListener('click', e => {
   if (e.target === e.currentTarget) document.body.classList.remove('show');
 });
@@ -229,7 +231,21 @@ refs.shareBtn.addEventListener('click', () => {
 
 
 refs.buyBtnElem.addEventListener('click',()=>{
-  document.body.classList.add('show');
-  document.querySelector('.js-test').classList.remove('hide');
-  refs.reportForm.classList.add('hide');
+  showModal(refs.paypalModal)
+  // succesPayPal()
 })
+
+function showModal(target){
+  document.body.classList.add('show');
+  refs.paypalModal.classList.add('hide');
+  refs.succesModal.classList.add('hide');
+  refs.reportForm.classList.add('hide');
+  target.classList.remove('hide');
+}
+
+function succesPayPal(data){
+  console.log(data);
+  const code = refs.succesModal.querySelector('h3')
+  code.textContent = uniqid();
+  showModal(refs.succesModal)
+}

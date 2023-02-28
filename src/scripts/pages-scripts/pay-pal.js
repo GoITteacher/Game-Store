@@ -1,4 +1,4 @@
-export function initPayPal(price){
+export function initPayPal(price, showModal){
 
     paypal.Buttons({
         style: {
@@ -21,7 +21,7 @@ export function initPayPal(price){
     
         onApprove:(data,actions)=>{
             actions.order.capture().then((res)=>{
-                console.log(res);
+                showModal(res)
             })
         },
 

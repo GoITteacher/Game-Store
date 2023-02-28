@@ -1,58 +1,60 @@
-.game-info{
+.game-info {
     min-height: 90vh;
-    .game-header{
+
+    .game-header {
         width: 100%;
         min-height: fit-content;
         margin-bottom: 20px;
         padding: 20px 0;
 
-        & h2{
+        & h2 {
             font-size: 40px;
             max-width: 70%;
         }
     }
 
-    .game-body{
+    .game-body {
         min-height: 80vw;
         width: 100%;
         display: flex;
         justify-content: space-between;
 
-        .game-body__left{
+        .game-body__left {
             min-height: 100%;
             max-width: 60%;
             width: fit-content;
             box-sizing: border-box;
             margin-right: 10%;
 
-            .game-img{
+            .game-img {
                 width: 100%;
                 overflow: hidden;
                 border-radius: 5px;
 
-                & img{
+                & img {
                     width: 100%;
                     height: 100%;
-                    object-fit:cover;
+                    object-fit: cover;
                     border-radius: 5px;
                 }
             }
 
-            .game-desc{
+            .game-desc {
                 position: relative;
                 margin: 20px 0;
                 max-height: 190px;
                 height: fit-content;
                 overflow: hidden;
 
-                p{
+                p {
                     margin-top: 10px;
                     width: 100%;
                     overflow: hidden;
+                    word-wrap: break-word;
                     color: $text-gray;
                 }
 
-                .game-gallery{
+                .game-gallery {
                     margin-top: 20px;
                     width: 100%;
                     height: fit-content;
@@ -62,7 +64,7 @@
                 }
 
                 .bottom-shadow {
-                    bottom:0px;
+                    bottom: 0px;
                     position: absolute;
                     background: linear-gradient(rgba(28, 28, 28, 0), $bg-primary);
                     height: 100px;
@@ -70,12 +72,12 @@
                 }
             }
 
-            .game-spec{
+            .game-spec {
                 margin-top: 70px;
-                color:$text-gray;
+                color: $text-gray;
                 list-style: none;
-                
-                & ul{
+
+                & ul {
                     margin: 20px 0;
                     width: 100%;
 
@@ -83,41 +85,42 @@
                         min-height: 37px;
                         display: flex;
                         flex-direction: column;
-                        margin: 20px 0 ;
+                        margin: 20px 0;
                         font-weight: 100;
 
-                        :nth-child(1){
+                        :nth-child(1) {
                             margin-bottom: 5px;
                         }
-                        
-                        :nth-child(2){
+
+                        :nth-child(2) {
                             color: $text;
                         }
                     }
                 }
 
-                & > div{
+                &>div {
                     padding: 30px;
-                    margin:15px 0 ;
+                    margin: 15px 0;
                     width: 100%;
                     border-radius: 5px;
                     background-color: $bg-secondary;
 
-                    .spec-header{
+                    .spec-header {
                         display: flex;
                         justify-content: space-between;
-                        span{
+
+                        span {
                             width: 100%;
                         }
                     }
-                    
-                    .spec-footer{
+
+                    .spec-footer {
                         border-top: 1px solid rgba(135, 135, 135, 0.587);
                         padding: 20px;
                         text-align: center;
-                        color:$text-gray;
+                        color: $text-gray;
 
-                        p{
+                        p {
                             margin: 10px;
                         }
                     }
@@ -125,35 +128,35 @@
             }
         }
 
-        .game-body__right{
+        .game-body__right {
             display: flex;
             flex-direction: column;
-            
+
             min-height: 100%;
             max-width: 30%;
             width: 500px;
 
-            .game-poster{
+            .game-poster {
                 width: 100%;
                 height: 150px;
                 overflow: hidden;
                 border-radius: 5px;
 
-                img{
+                img {
                     width: 100%;
                     height: 100%;
-                    object-fit:cover
+                    object-fit: cover
                 }
             }
 
-            .list-btn{
+            .list-btn {
                 margin-top: 20px;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
             }
 
-            .list-info{
+            .list-info {
                 margin-top: 20px;
                 display: flex;
                 flex-direction: column;
@@ -161,14 +164,14 @@
                 align-items: center;
                 color: $text-gray;
 
-                li{
+                li {
                     width: 100%;
                     padding: 10px 0;
                     display: flex;
                     justify-content: space-between;
                     border-bottom: 1px solid $bg-secondary;
 
-                    *:nth-child(2){
+                    *:nth-child(2) {
                         color: $text;
                         font-weight: 100;
                         opacity: 0.9;
@@ -176,11 +179,12 @@
                 }
             }
 
-            .footer-list-btn{
+            .footer-list-btn {
                 display: flex;
                 justify-content: space-between;
                 margin-top: 10px;
-                .btn{
+
+                .btn {
                     width: 48%;
                     height: 35px;
                     padding: 0;

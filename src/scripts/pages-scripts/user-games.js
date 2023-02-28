@@ -47,13 +47,15 @@ refs.createForm.addEventListener('submit', async e => {
   e.preventDefault();
 
   const formData = new FormData(e.target);
-  const game = {};
+  const game = {...DataBase.randomGame()};
 
+  game.date_release = Date.now();
   for (let [key, value] of formData.entries()) {
+    key = key.replace('game_','')
     game[key] = value;
   }
 
-  const gameId = await DataBase.createGame();
+  const gameId = await DataBase.createGame(game);
   DataBase.addGameForUser(gameId);
   renderGames();
   document.body.classList.remove('show');
@@ -62,7 +64,9 @@ refs.createForm.addEventListener('submit', async e => {
 
 renderGames();
 async function renderGames() {
+  
   const userGames = loadFromLS('user')?.games || [];
+
   const games = await DataBase.getGame(...userGames);
   if (games.length === 0) {
     refs.gamesListElem.innerHTML = '';

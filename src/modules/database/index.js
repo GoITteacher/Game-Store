@@ -46,13 +46,11 @@ export class DataBase {
     if (game) return game;
 
     if (DataBase.#online) {
-      const game = await DynamoAPI.getItem(TABLES.game, id);
-      return game;
-    } else {
-      const game = randomGame();
-      game.id = uniqid();
+      game = await DynamoAPI.getItem(TABLES.game, id);
       return game;
     }
+
+    return 'null'
   }
 
 
@@ -68,6 +66,7 @@ export class DataBase {
     const promises = gamesId.map(id=>{
       return DataBase.getGameById(id)
     });
+    
     return Promise.all(promises);
   }
 
@@ -111,6 +110,8 @@ export class DataBase {
     saveToLS('user', user);
     DynamoAPI.updateItem(TABLES.users, user.id, 'games', user.games);
   }
+
+  static randomGame = randomGame;
 }
 
 function randomGame() {

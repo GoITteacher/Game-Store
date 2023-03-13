@@ -5,6 +5,8 @@ const refs = {
   gameListEl: document.querySelector('.js-game-list'),
   navMenuElem: document.querySelector('.js-nav-menu'),
 };
+const emptyElem = refs.gameListEl.nextElementSibling;
+console.log();
 
 let GAMES = [
   {
@@ -73,8 +75,10 @@ function renderGame(games, reset = true) {
       'beforeend',
       games.map(gameTemplate).join('')
     );
+    emptyElem.classList.add('hide');
   } else {
     refs.gameListEl.innerHTML = '';
+    emptyElem.classList.remove('hide');
   }
 }
 
